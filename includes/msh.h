@@ -19,8 +19,9 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <sys/syslimits.h>
+# include <limits.h>
 # include "libft.h"
+# include "get_next_line.h"
 
 typedef struct		s_cmd
 {

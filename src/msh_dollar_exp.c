@@ -28,12 +28,12 @@ char			*msh_dollar_exp(t_msh *msh, char *str)
 	tmp2 = ft_strndup(str, c - str - 1);
 	next = ft_strdup(tmp);
 	tmp = ft_strndup(c, tmp - c);
-	c = ft_joinfree(tmp, "=", tmp);
+	c = ft_strjoin_free(tmp, "=", tmp);
 	if ((var = msh_find_env(c, msh->env)))
 		if ((tmp = ft_strchr(*var, '=')))
 		{
-			tmp2 = ft_joinfree(tmp2, tmp + 1, tmp2);
-			str = ft_joinfree(tmp2, next, str);
+			tmp2 = ft_strjoin_free(tmp2, tmp + 1, tmp2);
+			str = ft_strjoin_free(tmp2, next, str);
 		}
 	free(c);
 	free(tmp2);

@@ -16,9 +16,7 @@ static char		**msh_path_bin(char **env)
 {
 	char	*tmp;
 	char	**path;
-	int		i;
 
-	i = 2;
 	if (!(path = msh_find_env("PATH", env)) || !(*path)[5])
 		return (NULL);
 	tmp = (*path) + 5;
@@ -48,8 +46,8 @@ static void		msh_call_bin_sub(t_cmd *cmd, char ***path, char **tmp)
 					|| (((r.st_mode & S_IFMT) == S_IFDIR
 							|| !(r.st_mode & S_IXUSR)))))
 		{
-			cmd->av[0] = ft_joinfree("/", *tmp, cmd->av[0]);
-			cmd->av[0] = ft_joinfree(*((*path)++), cmd->av[0], cmd->av[0]);
+			cmd->av[0] = ft_strjoin_free("/", *tmp, cmd->av[0]);
+			cmd->av[0] = ft_strjoin_free(*((*path)++), cmd->av[0], cmd->av[0]);
 		}
 }
 

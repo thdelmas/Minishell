@@ -23,10 +23,8 @@ static int	msh_check_var(char *str)
 
 void		msh_setenv(t_msh *msh, t_cmd *cmd)
 {
-	char	**tmp;
 	char	*str;
 
-	tmp = msh->env;
 	if (!(cmd->av)[1])
 		msh_print_env(msh, cmd);
 	else if ((cmd->av)[2] && (cmd->av)[3])
@@ -40,7 +38,6 @@ void		msh_setenv(t_msh *msh, t_cmd *cmd)
 		{
 			if (msh_find_env((cmd->av)[1], msh->env))
 			{
-				tmp = msh->env;
 				msh_var_del(&(msh->env), (cmd->av)[1]);
 			}
 			str = ft_strjoin((cmd->av)[1], "=");

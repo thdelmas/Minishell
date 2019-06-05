@@ -44,12 +44,10 @@ static void		msh_cd_sub(t_msh *msh, char **pwd, char **np, char *olddir)
 void			msh_cd(t_msh *msh, t_cmd *cmd)
 {
 	char	**pwd;
-	char	*tmp;
 	char	*np;
 	char	*olddir;
 
 	pwd = msh_find_env("PWD", msh->env);
-	tmp = *pwd;
 	if (cmd->av)
 	{
 		if (!(olddir = ft_strnew(PATH_MAX + 1)))

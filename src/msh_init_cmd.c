@@ -48,6 +48,7 @@ t_cmd		*msh_init_cmd(void)
 		free(cmd);
 		return (NULL);
 	}
+	ft_putstr("yolo\n");
 	free(line);
 	cmd->status = 0;
 	cmd->next = NULL;

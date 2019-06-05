@@ -12,12 +12,12 @@
 
 NAME = minishell
 
-CC = gcc
+CC = clang
 CFLAGS = -Werror -Wall -Wextra 
 
 FT	= ./libft
 FT_LIB = $(addprefix $(FT)/,libft.a)
-FT_INC = -I ./libft
+FT_INC = -I ./libft/includes
 FT_LNK = -L ./libft -l ft
 
 SRC_DIR = ./src
@@ -45,9 +45,12 @@ C_FILES =	main.c \
 			msh_init_msh.c \
 			msh_make_arg.c \
 			msh_prompt.c \
+			get_next_line.c \
 			msh_split_whitespaces.c
+
 O_FILES = 	$(C_FILES:%.c=%.o)
 H_FILES =	msh.h \
+		get_net_line.h
 
 SRC = $(addprefix $(SRC_DIR)/,$(C_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/,$(O_FILES))
