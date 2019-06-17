@@ -6,13 +6,13 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/28 17:25:36 by thdelmas          #+#    #+#              #
-#    Updated: 2019/06/05 20:20:13 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/06/17 20:00:36 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ##################################### Tools ####################################
 
-AUTHORS ?= Ede-Ram Tcillard Tmeyer Thdelmas
+AUTHORS ?= Thdelmas
 
 ### Colors ###
 WHITE = \033[0m

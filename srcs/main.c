@@ -3,25 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 12:04:48 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/05/13 19:19:04 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/06/17 19:44:14 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "21sh.h"
-#include "libft.h"
-#include "sh_entrypoint.h"
+#include "sh.h"
 
-int				main(const int ac, const char **av, const char **env)
+int		main(int ac, char **av, char **env)
 {
-	if (ac == 1 && !av[1])
+	char	**av_tmp;
+	t_sh	*sh;
+
+	if (ac == 1)
 	{
-		sh_init(env);
-		sh_loop();
+		if (!(av_tmp = sh_tabdup(av)))
+			return (0);
+		if (!(sh = sh_init_sh(env)))
+			return (0);
+		sh_free_tab(&av_tmp);
+		sh_loop(sh);
+		sh_free_sh(&sh);
 	}
-	else
-		ft_putendl_fd("21sh: AHAH", 2);
 	return (0);
 }
