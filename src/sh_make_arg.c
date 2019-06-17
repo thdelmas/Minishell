@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sh_make_arg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/17 19:26:40 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/03/01 23:13:33 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/06/17 19:33:55 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		main(int ac, char **av, char **env)
+void	sh_make_arg(t_sh *sh, t_cmd *cmd)
 {
-	char	**av_tmp;
-	t_sh	*sh;
+	int i;
 
-	if (ac == 1)
+	i = 0;
+	if (!cmd || !cmd->av || !*(cmd->av))
+		return ;
+	while (cmd->av[i])
 	{
-		if (!(av_tmp = sh_tabdup(av)))
-			return (0);
-		if (!(sh = sh_init_sh(env)))
-			return (0);
-		sh_free_tab(&av_tmp);
-		sh_loop(sh);
-		sh_free_sh(&sh);
+		if (ft_strchr((cmd->av)[i], '$'))
+			(cmd->av)[i] = sh_dollar_exp(sh, (cmd->av)[i]);
+		if (ft_strchr((cmd->av)[i], '~'))
+			(cmd->av)[i] = sh_tilde_exp(sh, (cmd->av)[i]);
+		++i;
 	}
-	return (0);
 }

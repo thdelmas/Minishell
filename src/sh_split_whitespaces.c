@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_split_whitespaces.c                            :+:      :+:    :+:   */
+/*   sh_split_whitespaces.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 17:34:57 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 18:07:40 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 19:35:50 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-static int		msh_split_count(int mode, char *str, int num)
+static int		sh_split_count(int mode, char *str, int num)
 {
 	int i;
 	int k;
@@ -41,7 +41,7 @@ static int		msh_split_count(int mode, char *str, int num)
 	return (mot);
 }
 
-static void		msh_split_strcpy(char *dest, char *src)
+static void		sh_split_strcpy(char *dest, char *src)
 {
 	int i;
 
@@ -51,7 +51,7 @@ static void		msh_split_strcpy(char *dest, char *src)
 	dest[i] = '\0';
 }
 
-char			**msh_split_whitespaces(char *str)
+char			**sh_split_whitespaces(char *str)
 {
 	char	**tab;
 	int		i;
@@ -60,15 +60,15 @@ char			**msh_split_whitespaces(char *str)
 	i = 1;
 	if (!str)
 		return (NULL);
-	mot = msh_split_count(0, str, 0);
+	mot = sh_split_count(0, str, 0);
 	if (!(tab = (char**)malloc(sizeof(char*) * (mot + 1))))
 		return (NULL);
 	tab[mot] = NULL;
 	while (i <= mot)
 	{
-		if (!(tab[i - 1] = ft_strnew(msh_split_count(1, str, i))))
+		if (!(tab[i - 1] = ft_strnew(sh_split_count(1, str, i))))
 			return (NULL);
-		msh_split_strcpy(tab[i - 1], str + msh_split_count(2, str, i));
+		sh_split_strcpy(tab[i - 1], str + sh_split_count(2, str, i));
 		i++;
 	}
 	return (tab);

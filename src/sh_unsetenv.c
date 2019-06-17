@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_echo.c                                         :+:      :+:    :+:   */
+/*   sh_unsetenv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 15:33:03 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 18:17:08 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/28 21:14:18 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/06/17 19:37:14 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-void	msh_echo(t_msh *msh, t_cmd *cmd)
+void	sh_unsetenv(t_sh *sh, t_cmd *cmd)
 {
-	int i;
-	int opt;
+	int		i;
 
-	msh = (void *)msh;
-	opt = 0;
-	if (cmd->av && cmd->av[1])
-		opt = !(ft_strcmp("-n", (cmd->av)[1]));
-	i = (opt) ? 2 : 1;
-	while ((cmd->av)[i])
-	{
-		if (i > 1 + opt)
-			ft_putchar(' ');
-		ft_putstr((cmd->av)[i++]);
-	}
-	if (!opt)
-		ft_putchar('\n');
+	i = -1;
+	while ((cmd->av)[++i])
+		sh_var_del(&(sh->env), (cmd->av)[i]);
 }

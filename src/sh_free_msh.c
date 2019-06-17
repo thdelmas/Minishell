@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_print_env.c                                    :+:      :+:    :+:   */
+/*   sh_free_sh.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 22:26:41 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 18:18:34 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/03/03 20:16:59 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/06/17 19:30:33 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-void	msh_print_env(t_msh *msh, t_cmd *cmd)
+void	sh_free_sh(t_sh **sh)
 {
-	char **tmp;
-
-	cmd = (void *)cmd;
-	tmp = msh->env;
-	if (tmp)
-		while (*tmp)
-		{
-			if (**tmp)
-				ft_putendl(*(tmp++));
-		}
+	if ((*sh)->flags)
+		free(&((*sh)->flags));
+	if ((*sh)->prim_env)
+		sh_free_tab(&((*sh)->prim_env));
+	if ((*sh)->env)
+		sh_free_tab(&((*sh)->env));
+	if ((*sh)->cmd_begin)
+		sh_free_cmd(&((*sh)->cmd_begin));
+	free(*sh);
+	*sh = NULL;
 }

@@ -1,63 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_init_msh.c                                     :+:      :+:    :+:   */
+/*   sh_init_sh.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 19:41:24 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 22:20:54 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 19:32:12 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-static void	msh_init_shlvl(t_msh *msh)
+static void	sh_init_shlvl(t_sh *sh)
 {
 	char	**shlvl;
 	char	*tmp;
 	char	*tmp2;
 
-	if ((shlvl = msh_find_env("SHLVL", msh->env)))
+	if ((shlvl = sh_find_env("SHLVL", sh->env)))
 	{
 		tmp = *shlvl;
 		tmp2 = ft_itoa(ft_atoi(tmp + 6) + 1);
 	}
 	else
 		tmp2 = ft_strdup("1");
-	msh_var_add(&(msh->env), "SHLVL=", tmp2);
+	sh_var_add(&(sh->env), "SHLVL=", tmp2);
 	free(tmp2);
 }
 
-static void	msh_init_pwd(t_msh *msh)
+static void	sh_init_pwd(t_sh *sh)
 {
 	char	*tmp2;
 
 	if ((tmp2 = ft_strnew(PATH_MAX + 1)))
 	{
 		tmp2 = getcwd(tmp2, PATH_MAX);
-		msh_var_add(&(msh->env), "PWD=", tmp2);
+		sh_var_add(&(sh->env), "PWD=", tmp2);
 		free(tmp2);
 	}
 }
 
-static void	msh_init_env(t_msh *msh)
+static void	sh_init_env(t_sh *sh)
 {
-	msh_init_pwd(msh);
-	msh_init_shlvl(msh);
+	sh_init_pwd(sh);
+	sh_init_shlvl(sh);
 }
 
-t_msh		*msh_init_msh(char **env)
+t_sh		*sh_init_sh(char **env)
 {
-	t_msh *msh;
+	t_sh *sh;
 
-	if (!(msh = (t_msh *)malloc(sizeof(t_msh))))
+	if (!(sh = (t_sh *)malloc(sizeof(t_sh))))
 		return (NULL);
-	msh->flags = NULL;
-	msh->prim_env = msh_tabdup(env);
-	msh->env = msh_tabdup(env);
-	msh->cmd_begin = NULL;
-	msh->cmd = NULL;
-	msh_init_env(msh);
-	return (msh);
+	sh->flags = NULL;
+	sh->prim_env = sh_tabdup(env);
+	sh->env = sh_tabdup(env);
+	sh->cmd_begin = NULL;
+	sh->cmd = NULL;
+	sh_init_env(sh);
+	return (sh);
 }

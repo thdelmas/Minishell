@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_make_arg.c                                     :+:      :+:    :+:   */
+/*   sh_print_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/01 23:13:33 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 23:38:29 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/24 22:26:41 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/06/17 19:34:21 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-void	msh_make_arg(t_msh *msh, t_cmd *cmd)
+void	sh_print_env(t_sh *sh, t_cmd *cmd)
 {
-	int i;
+	char **tmp;
 
-	i = 0;
-	if (!cmd || !cmd->av || !*(cmd->av))
-		return ;
-	while (cmd->av[i])
-	{
-		if (ft_strchr((cmd->av)[i], '$'))
-			(cmd->av)[i] = msh_dollar_exp(msh, (cmd->av)[i]);
-		if (ft_strchr((cmd->av)[i], '~'))
-			(cmd->av)[i] = msh_tilde_exp(msh, (cmd->av)[i]);
-		++i;
-	}
+	cmd = (void *)cmd;
+	tmp = sh->env;
+	if (tmp)
+		while (*tmp)
+		{
+			if (**tmp)
+				ft_putendl(*(tmp++));
+		}
 }

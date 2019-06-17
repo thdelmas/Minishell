@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tilde_exp.c                                    :+:      :+:    :+:   */
+/*   sh_tilde_exp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 21:00:49 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 22:38:10 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 19:36:42 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-static char		**msh_tilde_exp_sub(t_msh *msh, char *c)
+static char		**sh_tilde_exp_sub(t_sh *sh, char *c)
 {
 	char	**ret;
 
-	if (c[1] == '-' && !(ret = msh_find_env("OLDPWD", msh->env)))
+	if (c[1] == '-' && !(ret = sh_find_env("OLDPWD", sh->env)))
 	{
 		ft_putendl("OLPDPWD not set");
 		return (NULL);
 	}
-	else if (c[1] == '+' && !(ret = msh_find_env("PWD", msh->env)))
+	else if (c[1] == '+' && !(ret = sh_find_env("PWD", sh->env)))
 	{
 		ft_putendl("PWD not set");
 		return (NULL);
 	}
-	else if (!(ret = msh_find_env("HOME", msh->env)))
+	else if (!(ret = sh_find_env("HOME", sh->env)))
 	{
 		ft_putendl("HOME not set");
 		return (NULL);
@@ -34,7 +34,7 @@ static char		**msh_tilde_exp_sub(t_msh *msh, char *c)
 	return (ret);
 }
 
-char			*msh_tilde_exp(t_msh *msh, char *str)
+char			*sh_tilde_exp(t_sh *sh, char *str)
 {
 	char	*c;
 	char	*tmp;
@@ -46,7 +46,7 @@ char			*msh_tilde_exp(t_msh *msh, char *str)
 		return (str);
 	tmp = ft_strndup(str, c - str);
 	next = (c[1] == '-' || c[1] == '+') ? c + 1 : c;
-	if (!(ret = msh_tilde_exp_sub(msh, c)))
+	if (!(ret = sh_tilde_exp_sub(sh, c)))
 		return (str);
 	tmp2 = ft_strdup(ft_strchr(*ret, '=') + 1);
 	c = ft_strjoin(tmp, tmp2);

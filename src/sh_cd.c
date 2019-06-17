@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_cd.c                                           :+:      :+:    :+:   */
+/*   sh_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 15:18:48 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 23:41:10 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 19:27:39 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-static void		msh_cd_sub(t_msh *msh, char **pwd, char **np, char *olddir)
+static void		sh_cd_sub(t_sh *sh, char **pwd, char **np, char *olddir)
 {
-	if (*(*np) == '-' && (pwd = msh_find_env("OLDPWD", msh->env)) && pwd[0][7])
+	if (*(*np) == '-' && (pwd = sh_find_env("OLDPWD", sh->env)) && pwd[0][7])
 	{
 		free(*np);
 		*np = ft_strdup(*pwd + 7);
@@ -35,19 +35,19 @@ static void		msh_cd_sub(t_msh *msh, char **pwd, char **np, char *olddir)
 		free(*np);
 		if ((*np = ft_strnew(PATH_MAX + 1)))
 			*np = getcwd(*np, PATH_MAX);
-		msh_var_add(&(msh->env), "OLDPWD=", olddir);
-		msh_var_add(&(msh->env), "PWD=", *np);
+		sh_var_add(&(sh->env), "OLDPWD=", olddir);
+		sh_var_add(&(sh->env), "PWD=", *np);
 		free(*np);
 	}
 }
 
-void			msh_cd(t_msh *msh, t_cmd *cmd)
+void			sh_cd(t_sh *sh, t_cmd *cmd)
 {
 	char	**pwd;
 	char	*np;
 	char	*olddir;
 
-	pwd = msh_find_env("PWD", msh->env);
+	pwd = sh_find_env("PWD", sh->env);
 	if (cmd->av)
 	{
 		if (!(olddir = ft_strnew(PATH_MAX + 1)))
@@ -55,14 +55,14 @@ void			msh_cd(t_msh *msh, t_cmd *cmd)
 		olddir = getcwd(olddir, PATH_MAX);
 		if ((cmd->av)[1])
 			np = ft_strdup((cmd->av)[1]);
-		else if ((pwd = msh_find_env("HOME=", msh->env)) && pwd[0][5])
+		else if ((pwd = sh_find_env("HOME=", sh->env)) && pwd[0][5])
 			np = ft_strdup(pwd[0] + 5);
 		else
 		{
 			ft_putendl("$HOME not set");
 			return ;
 		}
-		msh_cd_sub(msh, pwd, &np, olddir);
+		sh_cd_sub(sh, pwd, &np, olddir);
 		free(olddir);
 	}
 }
