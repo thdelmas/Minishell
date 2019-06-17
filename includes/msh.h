@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:58 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:50:36 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/03 22:23:05 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct		s_msh
 	t_cmd			*cmd;
 }					t_msh;
 
+void				test_tok(char *line);
 void				msh_loop(t_msh *msh);
 void				msh_prompt();
 char				**msh_find_env(char *name, char **env);

@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/24 15:33:18 by thdelmas          #+#    #+#              #
-#    Updated: 2019/03/11 14:50:19 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/06/17 19:12:00 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,11 @@ C_FILES =	main.c \
 
 O_FILES = 	$(C_FILES:%.c=%.o)
 H_FILES =	msh.h \
+<<<<<<< HEAD
+			get_next_line.h
+=======
 		get_net_line.h
+>>>>>>> f55e20cd47a981f96a27acd69922697c6a13bdef
 
 SRC = $(addprefix $(SRC_DIR)/,$(C_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/,$(O_FILES))
