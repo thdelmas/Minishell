@@ -6,17 +6,18 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 21:14:18 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/17 19:37:14 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 20:31:49 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	sh_unsetenv(t_sh *sh, t_cmd *cmd)
+int		sh_unsetenv(int ac, char **av, char **ev)
 {
 	int		i;
 
 	i = -1;
-	while ((cmd->av)[++i])
-		sh_var_del(&(sh->env), (cmd->av)[i]);
+	while (av[++i])
+		sh_var_del(&ev, av[i]);
+	return (0);
 }

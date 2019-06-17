@@ -6,28 +6,28 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 15:33:03 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/17 20:06:28 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 20:27:21 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	sh_echo(t_sh *sh, t_cmd *cmd)
+int		sh_echo(int ac, char **av, char **ev)
 {
 	int i;
 	int opt;
 
-	sh = (void *)sh;
 	opt = 0;
-	if (cmd->av && cmd->av[1])
-		opt = !(ft_strcmp("-n", (cmd->av)[1]));
+	if (av && av[1])
+		opt = !(ft_strcmp("-n", av[1]));
 	i = (opt) ? 2 : 1;
-	while ((cmd->av)[i])
+	while (av[i])
 	{
 		if (i > 1 + opt)
 			ft_putchar(' ');
-		ft_putstr((cmd->av)[i++]);
+		ft_putstr(av[i++]);
 	}
 	if (!opt)
 		ft_putchar('\n');
+	return (0);
 }

@@ -6,15 +6,15 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 15:18:48 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/17 19:27:39 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 20:27:54 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static void		sh_cd_sub(t_sh *sh, char **pwd, char **np, char *olddir)
+static void		sh_cd_sub(char ***ev, char **pwd, char **np, char *olddir)
 {
-	if (*(*np) == '-' && (pwd = sh_find_env("OLDPWD", sh->env)) && pwd[0][7])
+	if (*(*np) == '-' && (pwd = sh_find_env("OLDPWD", *ev)) && pwd[0][7])
 	{
 		free(*np);
 		*np = ft_strdup(*pwd + 7);
@@ -35,34 +35,35 @@ static void		sh_cd_sub(t_sh *sh, char **pwd, char **np, char *olddir)
 		free(*np);
 		if ((*np = ft_strnew(PATH_MAX + 1)))
 			*np = getcwd(*np, PATH_MAX);
-		sh_var_add(&(sh->env), "OLDPWD=", olddir);
-		sh_var_add(&(sh->env), "PWD=", *np);
+		sh_var_add(ev, "OLDPWD=", olddir);
+		sh_var_add(ev, "PWD=", *np);
 		free(*np);
 	}
 }
 
-void			sh_cd(t_sh *sh, t_cmd *cmd)
+int			sh_cd(int ac, char **av, char **ev)
 {
 	char	**pwd;
 	char	*np;
 	char	*olddir;
 
-	pwd = sh_find_env("PWD", sh->env);
-	if (cmd->av)
+	pwd = sh_find_env("PWD", ev);
+	if (av)
 	{
 		if (!(olddir = ft_strnew(PATH_MAX + 1)))
-			return ;
+			return (1);
 		olddir = getcwd(olddir, PATH_MAX);
-		if ((cmd->av)[1])
-			np = ft_strdup((cmd->av)[1]);
-		else if ((pwd = sh_find_env("HOME=", sh->env)) && pwd[0][5])
+		if (av[1])
+			np = ft_strdup(av[1]);
+		else if ((pwd = sh_find_env("HOME=", ev)) && pwd[0][5])
 			np = ft_strdup(pwd[0] + 5);
 		else
 		{
 			ft_putendl("$HOME not set");
-			return ;
+			return (1);
 		}
-		sh_cd_sub(sh, pwd, &np, olddir);
+		sh_cd_sub(&ev, pwd, &np, olddir);
 		free(olddir);
 	}
+	return (0);
 }

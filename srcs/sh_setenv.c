@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 17:58:56 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/17 19:35:15 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 20:31:11 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,29 @@ static int	sh_check_var(char *str)
 	return (1);
 }
 
-void		sh_setenv(t_sh *sh, t_cmd *cmd)
+int		sh_setenv(int ac, char **av, char **ev)
 {
 	char	*str;
 
-	if (!(cmd->av)[1])
-		sh_print_env(sh, cmd);
-	else if ((cmd->av)[2] && (cmd->av)[3])
+	if (!av[1])
+		sh_print_env(ac, av, ev);
+	else if (av[2] && av[3])
 		ft_putendl_fd("setenv : Too many arguments.", 2);
 	else
 	{
-		if (!sh_check_var((cmd->av)[1]))
+		if (!sh_check_var(av[1]))
 			ft_putendl_fd("setenv : Variable name must \
 				contain alphanumeric characters.", 2);
 		else
 		{
-			if (sh_find_env((cmd->av)[1], sh->env))
+			if (sh_find_env(av[1], ev))
 			{
-				sh_var_del(&(sh->env), (cmd->av)[1]);
+				sh_var_del(&ev, av[1]);
 			}
-			str = ft_strjoin((cmd->av)[1], "=");
-			sh_var_add(&(sh->env), str, cmd->av[2]);
+			str = ft_strjoin(av[1], "=");
+			sh_var_add(&ev, str, av[2]);
 			free(str);
 		}
 	}
+			return (0);
 }

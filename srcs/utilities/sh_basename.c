@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_line.h                                     :+:      :+:    :+:   */
+/*   sh_basename.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/29 02:25:57 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/05/13 15:48:03 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/06/16 23:45:07 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/06/17 00:07:25 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH21_COMMAND_LINE_H
-# define SH21_COMMAND_LINE_H
+#include "libft.h"
 
-void	sh_prompt(void);
-char	**sh_arguments(void);
-void	sh_error_parse(int ret);
-int		sh_check_str(char *str);
-char	**sh_strsplit_m(char const *s, char c);
-char	*sh_delete_last(char *command, int i);
-char	*sh_insert_char(char *command, char buf[3], int i);
-
-#endif
+int		sh_basename(int ac, char **av, char **ev)
+{
+	char	*tmp;
+	size_t	i;
+	
+	i = 0;
+	if (ac <= 1 || !av[1])
+		return (0);
+	tmp = ft_strrchr(av[1], '/');
+	while (*tmp == '/' && !tmp[1] && tmp != av[1])
+	{
+		*tmp = '\0';
+		tmp--;
+	}
+	tmp = ft_strrchr(av[1], '/') + (tmp != av[1]);
+	ft_putendl(tmp);
+		return (0);
+}

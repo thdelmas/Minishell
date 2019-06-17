@@ -6,13 +6,13 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 22:30:46 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/17 19:33:17 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/17 20:16:10 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	(*sh_is_builtin(t_cmd *cmd))(t_sh *, t_cmd *)
+int		(*sh_is_builtin(t_cmd *cmd))(int ac, char **av, char **ev)
 {
 	if (!ft_strcmp((cmd->av)[0], "cd"))
 		return (&sh_cd);
@@ -29,10 +29,12 @@ void	(*sh_is_builtin(t_cmd *cmd))(t_sh *, t_cmd *)
 
 void	sh_loop(t_sh *sh)
 {
-	void	(*f)(t_sh *sh, t_cmd *);
+	int		(*f)(int ac, char **av, char **ev);
 	t_cmd	*tmp;
 	t_cmd	*cmd;
+	int		i;
 
+	i = 0;
 	while ((cmd = sh_init_cmd(sh)))
 	{
 		if (sh->cmd_begin)
@@ -41,9 +43,11 @@ void	sh_loop(t_sh *sh)
 			sh->cmd_begin = cmd;
 		tmp = cmd;
 		sh_make_arg(sh, cmd);
+		while (cmd->av[i])
+			i++;
 		if (*(cmd->av) && (ft_strcmp(cmd->av[0], "exit"))
 				&& (f = sh_is_builtin(cmd)))
-			f(sh, cmd);
+			f(i, cmd->av, sh->env);
 		else if (*(cmd->av) && (ft_strcmp(cmd->av[0], "exit")))
 			sh_call_bin(sh, cmd);
 		else
