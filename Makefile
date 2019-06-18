@@ -49,18 +49,18 @@ INC = $(addprefix $(INC_DIR)/,$(H_FILES))
 LIB_FT_DIR = ./libft
 LIB_FT = $(addprefix $(LIB_FT_DIR)/,libft.a)
 LIB_FT_INC_DIR = ./libft/includes
-LIB_FT_LNK = -L ./libft -l ft
+LIB_FT_LNK = -L ./libft -lft
 
 
 ###  CC && FLAGS ###
 CC = clang
 CFLAGS = \
 		 $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS) $(LIB_FT_INC_DIR)) \
-		 -g3 #-Wall -Werror -Wextra
+		  #-Wall -Werror -Wextra
 
 LFLAGS = -ltermcap \
 		 -lncurses \
-		 $(LIB_FT_LNK)
+		 $(LIB_FT_LNK) $(LIB_FT)
 
 
 .PHONY: all clean fclean re
@@ -85,7 +85,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile | compil_msg
 ### Link ###
 .ONESHELL:
 $(NAME): $(OBJ_DIR) $(OBJ) | link_msg
-	$(CC) $(LFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
 
 ### Clean ###
 .ONESHELL:
