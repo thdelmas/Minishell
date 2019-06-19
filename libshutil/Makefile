@@ -6,12 +6,12 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/12 15:20:07 by thdelmas          #+#    #+#              #
-#    Updated: 2019/06/19 17:04:31 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/06/19 17:07:41 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := libft.a
-PROJECT := LIBFT
+NAME := libshutil.a
+PROJECT := LIBSHUtil
 RM = /bin/rm
 
 ### Directories ###
