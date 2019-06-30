@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:58 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/17 20:26:58 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/30 16:07:26 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ typedef struct		s_sh
 	t_cmd			*cmd;
 }					t_sh;
 
-t_sh				*sh(void);
+t_sh	*sh(void);
+void	sh_startup(void);
+void	sh_shutdown(void);
 
 void				sh_loop(t_sh *sh);
 void				sh_prompt();

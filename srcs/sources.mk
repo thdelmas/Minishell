@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/13 19:40:02 by thdelmas          #+#    #+#              #
-#    Updated: 2019/06/17 20:00:11 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/06/30 16:08:19 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,11 +35,13 @@ C_FILES = \
 	sh_free_sh.c \
 	sh_free_cmd.c \
 	sh_free_tab.c \
-	sh.c \
+	sh.c
 
-C_FILES_command_edition = \
+C_FILES_startup = \
+	sh_startup.c
 
-C_FILES_command_line = \
+C_FILES_shutdown = \
+	sh_shutdown.c
 
 C_FILES_entrypoint = \
 
