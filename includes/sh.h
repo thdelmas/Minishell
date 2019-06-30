@@ -39,6 +39,8 @@ typedef struct		s_sh
 	t_cmd			*cmd;
 }					t_sh;
 
+t_sh				*sh(void);
+
 void				sh_loop(t_sh *sh);
 void				sh_prompt();
 char				**sh_find_env(char *name, char **env);

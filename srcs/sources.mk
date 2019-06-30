@@ -35,6 +35,7 @@ C_FILES = \
 	sh_free_sh.c \
 	sh_free_cmd.c \
 	sh_free_tab.c \
+	sh.c \
 
 C_FILES_command_edition = \
 
