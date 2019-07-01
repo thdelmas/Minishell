@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 19:41:15 by thdelmas          #+#    #+#              #
-#    Updated: 2019/06/19 17:17:39 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/06/30 16:08:34 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ OBJ_DIR := ./.obj
 
 ### SUB FILES ###
 SUB_DIRS := \
+	startup \
+	shutdown
 
 ### INCLUDE SRC MAKEFILE ###
 include $(SRC_DIR)/sources.mk

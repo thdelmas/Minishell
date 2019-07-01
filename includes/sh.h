@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:58 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/30 16:07:26 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/06/30 17:05:58 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@ typedef struct		s_cmd
 
 typedef struct		s_sh
 {
-	char			*flags;
-	char			**prim_env;
-	char			**env;
-	t_cmd			*cmd_begin;
-	t_cmd			*cmd;
+	int				ac;
+	char			**av;
+	char			**ev;
 }					t_sh;
 
 t_sh	*sh(void);
-void	sh_startup(void);
+void	sh_startup(int ac, char **av, char **ev);
 void	sh_shutdown(void);
 
 void				sh_loop(t_sh *sh);
