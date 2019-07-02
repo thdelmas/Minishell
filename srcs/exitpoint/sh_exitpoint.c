@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sh_exitpoint.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/07/02 20:25:36 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/07/02 20:29:32 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/07/02 20:31:39 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
 #include "libft.h"
 
-int		main(int ac, char **av, char **ev)
+void	sh_exitpoint(void)
 {
-	ft_putendl("Minishell: main.c\n---");
-	sh_startup(ac, av, ev);
-	//sh_loop();
-	sh_shutdown();
-	return (0);
+	ft_putendl("Shell: exitpoint.c\n---");
 }

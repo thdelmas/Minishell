@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:58 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/30 17:05:58 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/07/02 20:28:00 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ typedef struct		s_sh
 	int				ac;
 	char			**av;
 	char			**ev;
+	struct t_param	*params;
 }					t_sh;
 
 t_sh	*sh(void);
-void	sh_startup(int ac, char **av, char **ev);
-void	sh_shutdown(void);
+void	sh_entrypoint(int ac, char **av, char **ev);
+void	sh_exitpoint(void);
 
 void				sh_loop(t_sh *sh);
 void				sh_prompt();

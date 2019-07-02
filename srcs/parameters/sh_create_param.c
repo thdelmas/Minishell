@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_startup.c                                       :+:      :+:    :+:   */
+/*   sh_create_param.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/30 16:00:00 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/30 17:06:10 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/07/01 14:53:44 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/07/01 14:56:47 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "sh.h"
-
-void	sh_startup(int ac, char **av, char **ev)
+t_param		*sh_create_param(char *key, char *value)
 {
-	int i;
+	t_param *new;
 
-	i = -1;
-	ft_putendl("Minishell: startup.c\n---");
-	sh()->ev = ev;
-	while (sh()->ev[++i])
-		ft_putendl(sh()->ev[i]);
+	if (!(new = (t_param *)malloc(sizeof(t_param))))
+		return(NULL);
+	new->key = ft_strdup(key);
+	new->value = ft_strdup(value);
+	new->next = NULL;
+	return (new);
 }

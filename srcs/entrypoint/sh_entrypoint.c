@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sh_entrypoint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/07/02 20:25:36 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/07/02 20:28:49 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/07/02 20:28:55 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
 #include "libft.h"
+#include "sh.h"
 
-int		main(int ac, char **av, char **ev)
+void	sh_entrypoint(int ac, char **av, char **ev)
 {
-	ft_putendl("Minishell: main.c\n---");
-	sh_startup(ac, av, ev);
-	//sh_loop();
-	sh_shutdown();
-	return (0);
+	int i;
+
+	i = -1;
+	ft_putendl("Minishell: startup.c\n---");
+	sh()->ev = ev;
 }
