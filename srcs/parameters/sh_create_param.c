@@ -6,9 +6,13 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 14:53:44 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/07/01 14:56:47 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/07/02 20:43:02 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "sh_params.h"
+#include "libft.h"
+#include <stdlib.h>
 
 t_param		*sh_create_param(char *key, char *value)
 {
