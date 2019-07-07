@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   libshutil.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 21:27:10 by thdelmas          #+#    #+#             */
-/*   Updated: 2018/11/09 21:27:12 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/07/07 16:43:18 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/07/07 17:41:51 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBSHUTIL_H
+# define LIBSHUTIL_H
 
-void	ft_putnbr(int nb)
-{
-	unsigned int nb2;
+#include "../../includes/sh_env.h"
 
-	if (nb < 0)
-	{
-		nb2 = -nb;
-		ft_putchar('-');
-	}
-	else
-		nb2 = nb;
-	if (nb2 >= 10)
-	{
-		ft_putnbr(nb2 / 10);
-		ft_putnbr(nb2 % 10);
-	}
-	else
-		ft_putchar(nb2 + 48);
-}
+int		sh_false(int ac, char **av, t_env **);
+int		sh_set(int ac, char **av, t_env **);
+int		sh_true(int ac, char **av, t_env **);
+
+#endif

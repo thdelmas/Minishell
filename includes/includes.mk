@@ -6,14 +6,14 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/30 14:33:36 by thdelmas          #+#    #+#              #
-#    Updated: 2019/07/02 20:41:23 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/07/07 17:36:06 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### MAIN FILES ###
 H_FILES = \
 	sh.h \
-	sh_params.h \
+	sh_env.h \
 
 ### SUB FILES ###
 H_FILES_ = \

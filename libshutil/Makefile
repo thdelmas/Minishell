@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/19 17:23:30 by thdelmas          #+#    #+#              #
-#    Updated: 2019/06/19 17:23:31 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/07/07 17:38:23 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,34 +28,42 @@ include $(SRC_DIR)/sources.mk
 ### INCLUDE INC MAKEFILE ###
 include $(INC_DIR)/includes.mk
 
-
 ### ALL SUB DIRS ###
 SRC_SUB_DIRS = $(addprefix $(SRC_DIR)/,$(SUB_DIRS))
 OBJ_SUB_DIRS = $(addprefix $(OBJ_DIR)/,$(SUB_DIRS))
 INC_SUB_DIRS = $(addprefix $(INC_DIR)/,$(SUB_DIRS))
 
-
 ### MAIN AND SUB FILES ###
 O_FILES = $(C_FILES:.c=.o)
-
 
 ### Full Paths ###
 SRC = $(addprefix $(SRC_DIR)/,$(C_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/,$(O_FILES))
 INC = $(addprefix $(INC_DIR)/,$(H_FILES))
 
+### Lib ###
+FT = ft
+FT_DIR = ../lib$(FT)
+FT_INC_DIR = $(FT_DIR)/includes
+FT_LNK = -L$(FT_DIR) -l$(FT)
 
 ###  CC && FLAGS ###
 CC = clang
-CFLAGS = $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS)) \
+CFLAGS = \
+		 $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS) $(FT_INC_DIR)) \
 		 # -Wall -Werror -Wextra
 
 LFLAGS = \
-
+		 $(FT_LNK)
 
 .PHONY: all clean fclean re
 
-all: hey_msg $(FT_LIB) $(NAME) bye_msg
+
+all: hey_msg $(FT) $(NAME) bye_msg
+
+### Lib compil ###
+$(FT): lib_msg
+	@make -C $(FT_DIR)
 
 ### Mkdir obj ###
 .ONESHELL:
@@ -66,7 +74,7 @@ $(OBJ_DIR): mkdir_msg
 .ONESHELL:
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile | compil_msg
 	@printf "$(BBLUE)$(@F): $(CLEAR)"
-	@$(CC) $(LFlAGS) $(CFLAGS) -o $@ -c $<
+	$(CC) $(LFlAGS) $(CFLAGS) -o $@ -c $<
 	@printf "$(BBLUE)Done !$(CLEAR)\n"
 
 ### Link ###

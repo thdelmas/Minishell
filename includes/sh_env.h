@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   sh_env.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/24 16:59:29 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/24 16:59:33 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/07/07 17:02:21 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/07/07 17:35:48 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SH_ENV
+# define SH_ENV
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+typedef struct		s_env
 {
-	char	*ns;
-	int		i;
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
-	if (!s)
-		return (0);
-	if (!(ns = (char*)ft_memalloc(len + 1)))
-		return (NULL);
-	i = 0;
-	while (len-- && s[start])
-		ns[i++] = s[start++];
-	return (ns);
-}
+t_env	*sh_create_param(char *key, char *value);
+t_env	*sh_env_params(char **env);
+
+#endif

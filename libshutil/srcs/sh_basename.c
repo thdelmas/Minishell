@@ -6,11 +6,13 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 17:01:47 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/06/19 17:03:37 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/07/07 17:40:55 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		sh_basename(int ac, char **av, char **ev)
+#include "libshutil.h"
+
+int		sh_basename(int ac, char **av, t_env **ev)
 {
 	return (0);
 }

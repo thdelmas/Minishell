@@ -6,18 +6,18 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 14:42:32 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/07/02 20:47:49 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/07/07 17:32:47 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_params.h"
+#include "sh_env.h"
 #include "libft.h"
 
-t_param		*sh_env_params(char **ev)
+t_env		*sh_env_params(char **ev)
 {
 	char	*s1;
 	size_t	i;
-	t_param	*params;
+	t_env	*params;
 
 	s1 = NULL;
 	if (ev && *ev)
