@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_free_tabstr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 21:23:44 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/07/13 18:09:36 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/03/07 14:31:50 by tmeyer            #+#    #+#             */
+/*   Updated: 2019/07/04 18:01:27 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strcpy(char *dest, const char *src)
+char	**ft_free_tabstr(char **tab)
 {
-	size_t n;
+	int i;
 
-	n = 0;
-	while (src[n])
+	i = 0;
+	while (tab && tab[i])
 	{
-		dest[n] = src[n];
-		n++;
+		free(tab[i]);
+		tab[i++] = NULL;
 	}
-	dest[n] = 0;
-	return (dest);
+	free(tab);
+	tab = NULL;
+	return (tab);
 }

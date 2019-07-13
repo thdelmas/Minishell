@@ -6,12 +6,14 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/19 17:23:30 by thdelmas          #+#    #+#              #
-#    Updated: 2019/07/07 17:38:23 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/07/10 03:40:47 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := libshutil.a
 PROJECT := LIBSHUtil
+AUTHORS := Ede-ram Tcillard Thdelmas Tmeyer
+
 RM = /bin/rm
 
 ### Directories ###
@@ -21,6 +23,8 @@ OBJ_DIR := ./.obj
 
 ### SUB FILES ###
 SUB_DIRS := \
+	rm \
+	tools
 
 ### INCLUDE SRC MAKEFILE ###
 include $(SRC_DIR)/sources.mk
@@ -49,51 +53,53 @@ FT_LNK = -L$(FT_DIR) -l$(FT)
 
 ###  CC && FLAGS ###
 CC = clang
-CFLAGS = \
-		 $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS) $(FT_INC_DIR)) \
-		 # -Wall -Werror -Wextra
+CFLAGS = $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS) $(FT_INC_DIR)) \
+		 #-Wall -Werror -Wextra
 
-LFLAGS = \
-		 $(FT_LNK)
+LFLAGS = $(FT_LNK)
 
 .PHONY: all clean fclean re
 
-
-all: hey_msg $(FT) $(NAME) bye_msg
+all: $(FT) $(NAME) bye_msg
 
 ### Lib compil ###
-$(FT): lib_msg
+$(FT): | lib_msg
 	@make -C $(FT_DIR)
 
 ### Mkdir obj ###
 .ONESHELL:
-$(OBJ_DIR): mkdir_msg
+$(OBJ_DIR): | mkdir_msg
 	mkdir -p $(OBJ_DIR) $(OBJ_SUB_DIRS)
 
 ### Compilation ###
 .ONESHELL:
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile | compil_msg
 	@printf "$(BBLUE)$(@F): $(CLEAR)"
-	$(CC) $(LFlAGS) $(CFLAGS) -o $@ -c $<
-	@printf "$(BBLUE)Done !$(CLEAR)\n"
+	@$(CC) $(LFlAGS) $(CFLAGS) -o $@ -c $<
+	@printf "$(BBLUE)Done !$(CLEAR) "
 
 ### Link ###
 .ONESHELL:
 $(NAME): $(OBJ_DIR) $(OBJ) | link_msg
-	@ar rcs $(NAME) $(OBJ)
+	@$(AR) rcs $(NAME) $(OBJ)
 	@printf "$(BBLUE)$@: Done.$(CLEAR)\n"
-
-.ONESHELL:
-test: re
-	./$(NAME)
 
 ### Clean ###
 .ONESHELL:
-clean: clean_msg
+$(FT)_clean: | lib_msg
+	@make -C $(FT_DIR) clean
+
+.ONESHELL:
+clean: | $(FT)_clean clean_msg
 	$(RM) -rf $(OBJ_DIR)
 
 .ONESHELL:
-fclean: clean fclean_msg
+$(FT)_fclean: | lib_msg
+	@make -C $(FT_DIR) fclean
+
+.ONESHELL:
+fclean: | $(FT)_fclean fclean_msg
+	$(RM) -rf $(OBJ_DIR)
 	$(RM) -rf $(NAME)
 
 re: fclean all
