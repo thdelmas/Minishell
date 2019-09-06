@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_free_msh.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/03/03 20:16:59 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/03/10 16:25:22 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-int		main(int ac, char **av, char **env)
+void	msh_free_msh(t_msh **msh)
 {
-	char	**av_tmp;
-	t_msh	*msh;
-
-	if (ac == 1)
-	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
-	}
-	return (0);
+	if ((*msh)->flags)
+		free(&((*msh)->flags));
+	if ((*msh)->prim_env)
+		msh_free_tab(&((*msh)->prim_env));
+	if ((*msh)->env)
+		msh_free_tab(&((*msh)->env));
+	if ((*msh)->cmd_begin)
+		msh_free_cmd(&((*msh)->cmd_begin));
+	free(*msh);
+	*msh = NULL;
 }

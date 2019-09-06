@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/09 20:44:20 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/01/30 12:18:24 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *))
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	t_list	*new;
+	t_list	*tmp;
 
-	if (ac == 1)
+	tmp = f(lst);
+	new = tmp;
+	while (lst->next)
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		lst = lst->next;
+		if (!(tmp->next = f(lst)))
+		{
+			free(tmp->next);
+			return (NULL);
+		}
+		tmp = tmp->next;
 	}
-	return (0);
+	return (new);
 }

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/09 21:23:44 by thdelmas          #+#    #+#             */
+/*   Updated: 2018/11/09 21:23:46 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	size_t n;
 
-	if (ac == 1)
+	n = 0;
+	while (src[n])
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		dest[n] = src[n];
+		n++;
 	}
-	return (0);
+	dest[n] = 0;
+	return (dest);
 }

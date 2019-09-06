@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/13 15:31:02 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/03/10 14:03:34 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 2
+# include <unistd.h>
+# include <stdlib.h>
+# include "libft.h"
 
-int		main(int ac, char **av, char **env)
+int					get_next_line(const int fd, char **line);
+
+typedef struct		s_flst
 {
-	char	**av_tmp;
-	t_msh	*msh;
-
-	if (ac == 1)
-	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
-	}
-	return (0);
-}
+	char			*content;
+	int				num;
+	struct s_flst	*next;
+}					t_flst;
+#endif

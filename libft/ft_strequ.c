@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/09 21:21:30 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/01/27 17:02:26 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+int		ft_strequ(const char *s1, const char *s2)
 {
-	char	**av_tmp;
-	t_msh	*msh;
-
-	if (ac == 1)
+	if (!s1 || !s2)
+		return (!s1 && !s2 ? 1 : 0);
+	while (*s1 == *s2 && *s1)
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		s1++;
+		s2++;
 	}
-	return (0);
+	return (*s1 == *s2);
 }

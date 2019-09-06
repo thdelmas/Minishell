@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_tabdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/26 16:54:04 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/03/10 22:18:05 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-int		main(int ac, char **av, char **env)
+char	**msh_tabdup(char **tab)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	char	**ret;
+	int		i;
 
-	if (ac == 1)
+	i = 0;
+	ret = NULL;
+	if (tab)
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		while (tab[i])
+			i++;
+		if (!(ret = (char **)malloc(sizeof(char *) * (i + 1))))
+			return (NULL);
+		i = -1;
+		while (tab[++i])
+			ret[i] = ft_strdup(tab[i]);
+		ret[i] = NULL;
 	}
-	return (0);
+	return (ret);
 }

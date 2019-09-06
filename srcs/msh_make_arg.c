@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_make_arg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/03/01 23:13:33 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/03/10 23:38:29 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-int		main(int ac, char **av, char **env)
+void	msh_make_arg(t_msh *msh, t_cmd *cmd)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	int i;
 
-	if (ac == 1)
+	i = 0;
+	if (!cmd || !cmd->av || !*(cmd->av))
+		return ;
+	while (cmd->av[i])
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		if (ft_strchr((cmd->av)[i], '$'))
+			(cmd->av)[i] = msh_dollar_exp(msh, (cmd->av)[i]);
+		if (ft_strchr((cmd->av)[i], '~'))
+			(cmd->av)[i] = msh_tilde_exp(msh, (cmd->av)[i]);
+		++i;
 	}
-	return (0);
 }

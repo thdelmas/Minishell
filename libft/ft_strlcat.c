@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/09 16:08:04 by thdelmas          #+#    #+#             */
+/*   Updated: 2018/12/22 19:39:51 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
+#include <string.h>
 
-int		main(int ac, char **av, char **env)
+size_t	ft_strlcat(char *dest, const char *src, size_t n)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	size_t res;
 
-	if (ac == 1)
+	res = n + ft_strlen(src);
+	if (n > ft_strlen(dest))
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		res = ft_strlen(dest) + ft_strlen(src);
+		ft_strncat(dest, src, n - ft_strlen(dest) - 1);
 	}
-	return (0);
+	return (res);
 }

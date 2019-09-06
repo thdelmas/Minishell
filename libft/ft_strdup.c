@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/09 21:22:05 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/02/28 21:07:00 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+char	*ft_strdup(const char *src)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	char	*dest;
+	size_t	n;
 
-	if (ac == 1)
+	n = 0;
+	if ((dest = (char *)malloc(sizeof(char) * (ft_strlen(src) + 1))))
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		while (src[n])
+		{
+			dest[n] = src[n];
+			n++;
+		}
+		dest[n] = 0;
 	}
-	return (0);
+	return (dest);
 }

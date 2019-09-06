@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/28 15:33:03 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/03/10 18:17:08 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-int		main(int ac, char **av, char **env)
+void	msh_echo(t_msh *msh, t_cmd *cmd)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	int i;
+	int opt;
 
-	if (ac == 1)
+	msh = (void *)msh;
+	opt = 0;
+	if (cmd->av && cmd->av[1])
+		opt = !(ft_strcmp("-n", (cmd->av)[1]));
+	i = (opt) ? 2 : 1;
+	while ((cmd->av)[i])
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		if (i > 1 + opt)
+			ft_putchar(' ');
+		ft_putstr((cmd->av)[i++]);
 	}
-	return (0);
+	if (!opt)
+		ft_putchar('\n');
 }

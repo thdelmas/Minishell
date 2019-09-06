@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/08 15:42:12 by thdelmas          #+#    #+#             */
+/*   Updated: 2018/11/08 15:42:23 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+char	*ft_strstr(const char *src, const char *needle)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	int i;
+	int j;
 
-	if (ac == 1)
+	i = -1;
+	if (!*needle)
+		return ((char *)src);
+	while (src[++i])
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		j = 0;
+		while (needle[j] == src[i + j])
+		{
+			if (needle[j + 1] == '\0')
+				return ((char *)(src + i));
+			j++;
+		}
 	}
-	return (0);
+	return (NULL);
 }

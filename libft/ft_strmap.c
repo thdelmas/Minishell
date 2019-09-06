@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/09 21:19:58 by thdelmas          #+#    #+#             */
+/*   Updated: 2018/11/09 21:20:14 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+char	*ft_strmap(const char *src, char (*f)(char))
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	size_t	len;
+	char	*dest;
 
-	if (ac == 1)
+	if (!src)
+		return (NULL);
+	len = ft_strlen(src);
+	if ((dest = (char *)malloc(sizeof(char) * (len + 1))))
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		dest[len] = 0;
+		while (len--)
+			dest[len] = f(src[len]);
 	}
-	return (0);
+	return (dest);
 }

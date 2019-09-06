@@ -5,89 +5,106 @@
 #                                                     +:+ +:+         +:+      #
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/05/12 15:20:07 by thdelmas          #+#    #+#              #
-#    Updated: 2019/07/10 03:48:34 by thdelmas         ###   ########.fr        #
+#    Created: 2019/02/24 16:49:40 by thdelmas          #+#    #+#              #
+#    Updated: 2019/03/10 22:48:02 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := libft.a
-PROJECT := LIBFT
-RM = /bin/rm
+NAME =	libft.a
+CFLAGS = -Wall -Werror -Wextra -I. -c
+FILES =	\
+ft_memset.c			\
+ft_bzero.c			\
+ft_memcpy.c			\
+ft_memccpy.c		\
+ft_memmove.c		\
+ft_memchr.c			\
+ft_memcmp.c			\
+ft_strlen.c			\
+ft_strdup.c			\
+ft_strndup.c		\
+ft_strcpy.c			\
+ft_strncpy.c		\
+ft_strcat.c			\
+ft_strncat.c		\
+ft_strlcat.c		\
+ft_strchr.c			\
+ft_strrchr.c		\
+ft_strstr.c			\
+ft_strnstr.c		\
+ft_strcmp.c			\
+ft_strncmp.c		\
+ft_atoi.c			\
+ft_isalpha.c		\
+ft_isdigit.c		\
+ft_isalnum.c		\
+ft_isascii.c		\
+ft_isprint.c		\
+ft_toupper.c		\
+ft_tolower.c		\
+ft_memalloc.c		\
+ft_memdel.c			\
+ft_strnew.c			\
+ft_strdel.c			\
+ft_strclr.c			\
+ft_striter.c		\
+ft_striteri.c		\
+ft_strmap.c			\
+ft_strmapi.c		\
+ft_strequ.c			\
+ft_strnequ.c		\
+ft_strsub.c			\
+ft_strjoin.c		\
+ft_joinfree.c		\
+ft_strtrim.c		\
+ft_strsplit.c		\
+ft_itoa.c			\
+ft_putchar.c		\
+ft_putchar_fd.c		\
+ft_putstr.c			\
+ft_putstr_fd.c		\
+ft_putendl.c		\
+ft_putendl_fd.c		\
+ft_putnbr.c			\
+ft_putnbr_fd.c		\
+ft_lstnew.c			\
+ft_lstdelone.c		\
+ft_lstdel.c			\
+ft_lstadd.c			\
+ft_lstiter.c		\
+ft_is_prime.c		\
+ft_sqrt.c			\
+ft_power.c			\
+ft_str_dupsize.c	\
+ft_factorial.c		\
+get_next_line.c		\
+ft_lstmap.c
 
-### Directories ###
-SRC_DIR := ./srcs
-INC_DIR := ./includes
-OBJ_DIR := ./.obj
+OBJ= $(subst .c,.o, $(FILES))
 
-### SUB FILES ###
-SUB_DIRS := \
-	conv \
-	int \
-	lst \
-	math \
-	mem \
-	str \
-	print \
-	tab_str
+all: $(NAME)
 
-### INCLUDE SRC MAKEFILE ###
-include $(SRC_DIR)/sources.mk
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
-### INCLUDE INC MAKEFILE ###
-include $(INC_DIR)/includes.mk
+# This won't run if the source files don't exist or are not modified
+$(OBJ):
 
-### ALL SUB DIRS ###
-SRC_SUB_DIRS = $(addprefix $(SRC_DIR)/,$(SUB_DIRS))
-OBJ_SUB_DIRS = $(addprefix $(OBJ_DIR)/,$(SUB_DIRS))
-INC_SUB_DIRS = $(addprefix $(INC_DIR)/,$(SUB_DIRS))
+clean:
+	rm -f $(OBJ)
 
-### MAIN AND SUB FILES ###
-O_FILES = $(C_FILES:.c=.o)
-
-### Full Paths ###
-SRC = $(addprefix $(SRC_DIR)/,$(C_FILES))
-OBJ = $(addprefix $(OBJ_DIR)/,$(O_FILES))
-INC = $(addprefix $(INC_DIR)/,$(H_FILES))
-
-###  CC && FLAGS ###
-CC = clang
-CFLAGS = $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS)) \
-		 -Wall -Werror -Wextra
-
-LFLAGS = 
-
-.PHONY: all clean fclean re
-
-all: $(NAME) bye_msg
-
-### Mkdir obj ###
-.ONESHELL:
-$(OBJ_DIR): mkdir_msg
-	mkdir -p $(OBJ_DIR) $(OBJ_SUB_DIRS)
-
-### Compilation ###
-.ONESHELL:
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile | compil_msg
-	@$(CC) $(LFlAGS) $(CFLAGS) -o $@ -c $<
-	@printf "$(BBLUE)$(@F)$(CLEAR) "
-
-### Link ###
-.ONESHELL:
-$(NAME): $(OBJ_DIR) $(OBJ) | link_msg
-	@$(AR) rcs $(NAME) $(OBJ)
-	@printf "$(BBLUE)$@: Done.$(CLEAR)\n"
-
-### Clean ###
-.ONESHELL:
-clean: | clean_msg
-	$(RM) -rf $(OBJ_DIR)
-
-.ONESHELL:
-fclean: | fclean_msg
-	$(RM) -rf $(OBJ_DIR)
-	$(RM) -rf $(NAME)
+fclean: clean
+	rm -f $(NAME) libft.so
 
 re: fclean all
 
-### INCLUDE TOOLS MAKEFILE ###
-include ./tools.mk
+test: re
+	cp libft.a libft.h ../libft-checker/
+	cp libft.a libft.h ../libft-pwner/
+
+so:
+	cc -shared -o libft.so -fPIC ft*.c
+# .PHONY to make sure that gnu make will still run even if files called
+# clean / fclean / all and re already exist in the directory
+.PHONY: clean fclean all re

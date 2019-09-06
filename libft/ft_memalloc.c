@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/08 17:29:08 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/02/15 16:50:19 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+void	*ft_memalloc(size_t size)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	char	*ptr;
 
-	if (ac == 1)
-	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
-	}
-	return (0);
+	if (size <= 0)
+		return (NULL);
+	if (!(ptr = (char *)malloc(sizeof(char) * size)))
+		return (NULL);
+	while (--size)
+		ptr[size] = 0;
+	*ptr = 0;
+	return ((void*)(ptr));
 }

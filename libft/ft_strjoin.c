@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/09 21:20:47 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/03/10 22:52:01 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	char *dest;
 
-	if (ac == 1)
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1 || !s2)
+		return (!s1 ? ft_strdup(s2) : ft_strdup(s1));
+	if ((dest = ft_memalloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		ft_strcat(dest, s1);
+		ft_strcat(dest, s2);
 	}
-	return (0);
+	return (dest);
 }

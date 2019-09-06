@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2018/11/08 13:56:45 by thdelmas          #+#    #+#             */
+/*   Updated: 2018/11/09 21:14:30 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+char	*ft_strtrim(char const *s)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	int i;
+	int j;
 
-	if (ac == 1)
+	i = 0;
+	j = 0;
+	if (!s)
+		return (NULL);
+	while ((*s == ' ' || *s == '\t' || *s == '\n') && *s)
+		s++;
+	while (s[i])
 	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+			j++;
+		else
+			j = 0;
+		i++;
 	}
-	return (0);
+	return (ft_strndup(s, ft_strlen(s) - j));
 }

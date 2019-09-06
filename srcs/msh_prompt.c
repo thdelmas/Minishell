@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/25 07:51:30 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/03/10 22:20:36 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-int		main(int ac, char **av, char **env)
+void	msh_prompt(void)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	char *prompt;
+	char *tmp;
 
-	if (ac == 1)
-	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
-	}
-	return (0);
+	if (!(tmp = ft_strnew(PATH_MAX + 1)))
+		return ;
+	tmp = getcwd(tmp, PATH_MAX);
+	prompt = ft_strjoin("\033[0;31m", tmp);
+	free(tmp);
+	tmp = ft_strjoin(prompt, "\033[0m");
+	free(prompt);
+	prompt = ft_strjoin(tmp, "\033[0;33m c> \033[0m");
+	free(tmp);
+	ft_putstr_fd(prompt, 2);
+	free(prompt);
 }

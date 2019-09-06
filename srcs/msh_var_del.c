@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msh_tab_del.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/27 21:43:24 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/03/10 18:06:51 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-int		main(int ac, char **av, char **env)
+void	msh_var_del(char ***tab, char *str)
 {
-	char	**av_tmp;
-	t_msh	*msh;
+	char	**ret;
+	int		i;
+	int		j;
 
-	if (ac == 1)
-	{
-		if (!(av_tmp = msh_tabdup(av)))
-			return (0);
-		if (!(msh = msh_init_msh(env)))
-			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
-	}
-	return (0);
+	if (!*tab)
+		return ;
+	i = 0;
+	j = 0;
+	while ((*tab)[i])
+		i++;
+	if (!(ret = (char **)malloc(sizeof(char *) * (i + 1))))
+		return ;
+	i = -1;
+	while ((*tab)[++i])
+		if (ft_strncmp((*tab)[i], str, ft_strlen(str)))
+			ret[j++] = ft_strdup((*tab)[i]);
+	ret[j] = NULL;
+	msh_free_tab(tab);
+	*tab = ret;
 }
