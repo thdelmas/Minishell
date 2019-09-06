@@ -5,76 +5,110 @@
 #                                                     +:+ +:+         +:+      #
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/24 15:33:18 by thdelmas          #+#    #+#              #
-#    Updated: 2019/09/06 22:52:34 by thdelmas         ###   ########.fr        #
+#    Created: 2019/06/05 17:18:13 by thdelmas          #+#    #+#              #
+#    Updated: 2019/09/06 23:38:01 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME := minishell
+PROJECT := MINISHELL
+AUTHORS := Thdelmas
 
-CC = clang
-CFLAGS = -Werror -Wall -Wextra 
+RM = /bin/rm
 
-FT	= ./libft
-FT_LIB = $(addprefix $(FT)/,libft.a)
-FT_INC = -I ./libft
-FT_LNK = -L ./libft -l ft
+### Directories ###
+SRC_DIR := ./srcs
+INC_DIR := ./includes
+OBJ_DIR := ./.obj
 
-SRC_DIR = ./srcs
-INC_DIR = ./includes
-OBJ_DIR = ./obj
+### SUB FILES ###
+SUB_DIRS := \
 
-C_FILES =	main.c \
-			msh_loop.c \
-			msh_cd.c \
-			msh_echo.c \
-			msh_find_env.c \
-			msh_call_bin.c \
-			msh_setenv.c \
-			msh_unsetenv.c \
-			msh_print_env.c \
-			msh_free_tab.c \
-			msh_tilde_exp.c \
-			msh_dollar_exp.c \
-			msh_tabdup.c \
-			msh_var_add.c \
-			msh_var_del.c \
-			msh_free_msh.c \
-			msh_free_cmd.c \
-			msh_init_cmd.c \
-			msh_init_msh.c \
-			msh_make_arg.c \
-			msh_prompt.c \
-			msh_split_whitespaces.c
-O_FILES = 	$(C_FILES:%.c=%.o)
-H_FILES =	msh.h \
+### INCLUDE SRC MAKEFILE ###
+include $(SRC_DIR)/sources.mk
 
+### INCLUDE INC MAKEFILE ###
+include $(INC_DIR)/includes.mk
+
+
+### ALL SUB DIRS ###
+SRC_SUB_DIRS = $(addprefix $(SRC_DIR)/,$(SUB_DIRS))
+OBJ_SUB_DIRS = $(addprefix $(OBJ_DIR)/,$(SUB_DIRS))
+INC_SUB_DIRS = $(addprefix $(INC_DIR)/,$(SUB_DIRS))
+
+
+### MAIN AND SUB FILES ###
+O_FILES = $(C_FILES:.c=.o)
+
+
+### Full Paths ###
 SRC = $(addprefix $(SRC_DIR)/,$(C_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/,$(O_FILES))
 INC = $(addprefix $(INC_DIR)/,$(H_FILES))
 
-all: obj $(FT_LIB) $(NAME)
 
-$(NAME): $(OBJ) $(INC_DIR)/msh.h
-	$(CC) $(CFLAGS) $(OBJ) $(FT_LNK) -o $(NAME)
+### Lib ###
+FT = ft
+FT_DIR = ./lib$(FT)
+FT_INC_DIR = $(FT_DIR)/includes
+FT_LNK = -L$(FT_DIR) -l$(FT)
 
-obj:
-	mkdir -p $(OBJ_DIR)
+###  CC && FLAGS ###
+CC = clang
+DEBUG_FLAGS = -g3
+CFLAGS = \
+		 $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS) $(FT_INC_DIR)) \
+		 $(DEBUG_FLAGS) \
+		 -Wall -Werror -Wextra
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(FT_INC) -I $(INC_DIR) -o $@ -c $<
+LFLAGS = -ltermcap \
+		 -lncurses \
+		 $(FT_LNK) \
 
-$(FT_LIB):
-	make -C $(FT)
 
-clean:
-	rm -rf $(OBJ_DIR)
-	make -C $(FT) clean
 
-fclean: clean
-	rm -rf $(NAME)
-	make -C $(FT) fclean
+.PHONY: all clean fclean re
+
+all: $(FT) $(NAME) bye_msg
+
+### Lib compil ###
+$(FT): | lib_msg
+	@make -C $(FT_DIR)
+
+$(SHUTIL): $(FT) | lib_msg
+	@make -C $(SHUTIL_DIR)
+
+### Mkdir obj ###
+$(OBJ_DIR): | mkdir_msg
+	@mkdir -p $(OBJ_DIR) $(OBJ_SUB_DIRS)
+
+### Compilation ###
+.ONESHELL:
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile | compil_msg
+	$(CC) $(CFLAGS) -o $@ -c $<
+	@printf "$(BBLUE)$(@F)$(CLEAR) "
+
+### Link ###
+$(NAME): $(OBJ_DIR) $(OBJ) $(INC) Makefile $(FT_DIR)/libft.a | link_msg
+	$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
+	@printf "$(BBLUE)$@: Done.$(CLEAR)\n"
+
+### Clean ###
+$(FT)_clean: | lib_msg
+	@make -C $(FT_DIR) clean
+
+clean: $(FT)_clean $(SHUTIL)_clean | clean_msg
+	$(RM) -rf $(OBJ_DIR)
+
+$(FT)_fclean: | lib_msg
+	@make -C $(FT_DIR) fclean
+
+fclean: $(FT)_fclean | fclean_msg
+	$(RM) -rf $(OBJ_DIR)
+	$(RM) -rf $(NAME).dSYM
+	$(RM) -rf $(NAME)
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+### INCLUDE TOOLS MAKEFILE ###
+include ./tools.mk

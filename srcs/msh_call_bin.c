@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 16:17:19 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:37:07 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/09/06 23:39:28 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void		msh_call_bin_sub(t_cmd *cmd, char ***path, char **tmp)
 					|| (((r.st_mode & S_IFMT) == S_IFDIR
 							|| !(r.st_mode & S_IXUSR)))))
 		{
-			cmd->av[0] = ft_joinfree("/", *tmp, cmd->av[0]);
-			cmd->av[0] = ft_joinfree(*((*path)++), cmd->av[0], cmd->av[0]);
+			cmd->av[0] = ft_strjoin_free("/", *tmp, cmd->av[0]);
+			cmd->av[0] = ft_strjoin_free(*((*path)++), cmd->av[0], cmd->av[0]);
 		}
 }
 
