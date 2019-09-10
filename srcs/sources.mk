@@ -6,11 +6,12 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 23:34:28 by thdelmas          #+#    #+#              #
-#    Updated: 2019/09/06 23:35:44 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/09/10 12:28:09 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 C_FILES = \
+	get_next_line.c \
 	main.c \
 	msh_call_bin.c \
 	msh_cd.c \
@@ -22,7 +23,6 @@ C_FILES = \
 	msh_free_tab.c \
 	msh_init_cmd.c \
 	msh_init_msh.c \
-	msh_is_builtin.c \
 	msh_loop.c \
 	msh_make_arg.c \
 	msh_print_env.c \

@@ -6,11 +6,12 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 22:43:16 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 22:21:16 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/09/10 12:27:43 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
+#include "get_next_line.h"
 
 static int	msh_empty_ln(char *line)
 {
