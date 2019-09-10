@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 17:18:13 by thdelmas          #+#    #+#              #
-#    Updated: 2019/09/06 23:38:01 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/09/10 14:16:14 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,12 +86,10 @@ $(OBJ_DIR): | mkdir_msg
 .ONESHELL:
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile | compil_msg
 	$(CC) $(CFLAGS) -o $@ -c $<
-	@printf "$(BBLUE)$(@F)$(CLEAR) "
 
 ### Link ###
 $(NAME): $(OBJ_DIR) $(OBJ) $(INC) Makefile $(FT_DIR)/libft.a | link_msg
 	$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
-	@printf "$(BBLUE)$@: Done.$(CLEAR)\n"
 
 ### Clean ###
 $(FT)_clean: | lib_msg
