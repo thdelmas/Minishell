@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_setenv.c                                       :+:      :+:    :+:   */
+/*   sh_setenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 17:58:56 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 23:44:40 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:55:50 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-static int	msh_check_var(char *str)
+static int	sh_check_var(char *str)
 {
 	str--;
 	while (*(++str))
@@ -21,30 +21,30 @@ static int	msh_check_var(char *str)
 	return (1);
 }
 
-void		msh_setenv(t_msh *msh, t_cmd *cmd)
+void		sh_setenv(t_sh *sh, t_cmd *cmd)
 {
 	char	**tmp;
 	char	*str;
 
-	tmp = msh->env;
+	tmp = sh->env;
 	if (!(cmd->av)[1])
-		msh_print_env(msh, cmd);
+		sh_print_env(sh, cmd);
 	else if ((cmd->av)[2] && (cmd->av)[3])
 		ft_putendl_fd("setenv : Too many arguments.", 2);
 	else
 	{
-		if (!msh_check_var((cmd->av)[1]))
+		if (!sh_check_var((cmd->av)[1]))
 			ft_putendl_fd("setenv : Variable name must \
 				contain alphanumeric characters.", 2);
 		else
 		{
-			if (msh_find_env((cmd->av)[1], msh->env))
+			if (sh_find_env((cmd->av)[1], sh->env))
 			{
-				tmp = msh->env;
-				msh_var_del(&(msh->env), (cmd->av)[1]);
+				tmp = sh->env;
+				sh_var_del(&(sh->env), (cmd->av)[1]);
 			}
 			str = ft_strjoin((cmd->av)[1], "=");
-			msh_var_add(&(msh->env), str, cmd->av[2]);
+			sh_var_add(&(sh->env), str, cmd->av[2]);
 			free(str);
 		}
 	}

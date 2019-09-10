@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_dollar_exp.c                                   :+:      :+:    :+:   */
+/*   sh_dollar_exp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 23:09:22 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/06 23:39:39 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/09/10 12:48:16 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-char			*msh_dollar_exp(t_msh *msh, char *str)
+char			*sh_dollar_exp(t_sh *sh, char *str)
 {
 	char	*c;
 	char	*tmp;
@@ -29,7 +29,7 @@ char			*msh_dollar_exp(t_msh *msh, char *str)
 	next = ft_strdup(tmp);
 	tmp = ft_strndup(c, tmp - c);
 	c = ft_strjoin_free(tmp, "=", tmp);
-	if ((var = msh_find_env(c, msh->env)))
+	if ((var = sh_find_env(c, sh->env)))
 		if ((tmp = ft_strchr(*var, '=')))
 		{
 			tmp2 = ft_strjoin_free(tmp2, tmp + 1, tmp2);

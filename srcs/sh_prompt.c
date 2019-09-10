@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_free_cmd.c                                     :+:      :+:    :+:   */
+/*   sh_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/03 20:21:28 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 23:40:27 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/25 07:51:30 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/10 13:55:42 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-void	msh_free_cmd(t_cmd **cmd)
+void	sh_prompt(void)
 {
-	t_cmd *tmp;
+	char *prompt;
+	char *tmp;
 
-	if (cmd)
-		while (*cmd)
-		{
-			tmp = (*cmd)->next;
-			if ((*cmd)->av)
-				msh_free_tab(&((*cmd)->av));
-			free(*cmd);
-			*cmd = tmp;
-		}
+	if (!(tmp = ft_strnew(PATH_MAX + 1)))
+		return ;
+	tmp = getcwd(tmp, PATH_MAX);
+	prompt = ft_strjoin("\033[0;31m", tmp);
+	free(tmp);
+	tmp = ft_strjoin(prompt, "\033[0m");
+	free(prompt);
+	prompt = ft_strjoin(tmp, "\033[0;33m c> \033[0m");
+	free(tmp);
+	ft_putstr_fd(prompt, 2);
+	free(prompt);
 }

@@ -1,47 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tab_add.c                                      :+:      :+:    :+:   */
+/*   sh_tab_del.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/27 21:39:38 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 18:09:38 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/27 21:43:24 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/10 13:56:38 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-static void	msh_var_replace(char ***tab, char *name, char *val)
-{
-	char	**dest;
-
-	dest = msh_find_env(name, *tab);
-	free(*dest);
-	*dest = ft_strjoin(name, val);
-}
-
-void		msh_var_add(char ***tab, char *name, char *val)
+void	sh_var_del(char ***tab, char *str)
 {
 	char	**ret;
-	char	*tmp;
 	int		i;
+	int		j;
 
 	if (!*tab)
 		return ;
-	if ((msh_find_env(name, *tab)))
-		return (msh_var_replace(tab, name, val));
 	i = 0;
+	j = 0;
 	while ((*tab)[i])
 		i++;
-	if (!(ret = (char **)malloc(sizeof(char *) * (i + 3))))
+	if (!(ret = (char **)malloc(sizeof(char *) * (i + 1))))
 		return ;
 	i = -1;
-	tmp = ft_strjoin(name, val);
 	while ((*tab)[++i])
-		ret[i] = ft_strdup((*tab)[i]);
-	ret[i] = tmp;
-	ret[++i] = NULL;
-	msh_free_tab(tab);
+		if (ft_strncmp((*tab)[i], str, ft_strlen(str)))
+			ret[j++] = ft_strdup((*tab)[i]);
+	ret[j] = NULL;
+	sh_free_tab(tab);
 	*tab = ret;
 }

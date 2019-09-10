@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_prompt.c                                       :+:      :+:    :+:   */
+/*   sh_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/25 07:51:30 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 22:20:36 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/28 15:33:03 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/10 12:48:30 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-void	msh_prompt(void)
+void	sh_echo(t_sh *sh, t_cmd *cmd)
 {
-	char *prompt;
-	char *tmp;
+	int i;
+	int opt;
 
-	if (!(tmp = ft_strnew(PATH_MAX + 1)))
-		return ;
-	tmp = getcwd(tmp, PATH_MAX);
-	prompt = ft_strjoin("\033[0;31m", tmp);
-	free(tmp);
-	tmp = ft_strjoin(prompt, "\033[0m");
-	free(prompt);
-	prompt = ft_strjoin(tmp, "\033[0;33m c> \033[0m");
-	free(tmp);
-	ft_putstr_fd(prompt, 2);
-	free(prompt);
+	sh = (void *)sh;
+	opt = 0;
+	if (cmd->av && cmd->av[1])
+		opt = !(ft_strcmp("-n", (cmd->av)[1]));
+	i = (opt) ? 2 : 1;
+	while ((cmd->av)[i])
+	{
+		if (i > 1 + opt)
+			ft_putchar(' ');
+		ft_putstr((cmd->av)[i++]);
+	}
+	if (!opt)
+		ft_putchar('\n');
 }

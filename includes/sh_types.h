@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_unsetenv.c                                     :+:      :+:    :+:   */
+/*   sh_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 21:14:18 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 18:18:10 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/09/10 12:37:28 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/10 14:00:17 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#ifndef SH_TYPES_H
+# define SH_TYPES_H
 
-void	msh_unsetenv(t_msh *msh, t_cmd *cmd)
+typedef	struct		s_cmd
 {
-	int		i;
+	char			**av;
+	int				status;
+	struct s_cmd	*next;
+}					t_cmd;
 
-	i = -1;
-	while ((cmd->av)[++i])
-		msh_var_del(&(msh->env), (cmd->av)[i]);
-}
+
+typedef struct		s_sh
+{
+	//OLD
+	char	*flags;
+	char	**prim_env;
+	char	**env;
+	t_cmd	*cmd_begin;
+	t_cmd	*cmd;
+}					t_sh;
+
+#endif

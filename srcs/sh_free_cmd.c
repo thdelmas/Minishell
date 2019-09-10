@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_free_msh.c                                     :+:      :+:    :+:   */
+/*   sh_free_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/03 20:16:59 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 16:25:22 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/03/03 20:21:28 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/10 12:48:51 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-void	msh_free_msh(t_msh **msh)
+void	sh_free_cmd(t_cmd **cmd)
 {
-	if ((*msh)->flags)
-		free(&((*msh)->flags));
-	if ((*msh)->prim_env)
-		msh_free_tab(&((*msh)->prim_env));
-	if ((*msh)->env)
-		msh_free_tab(&((*msh)->env));
-	if ((*msh)->cmd_begin)
-		msh_free_cmd(&((*msh)->cmd_begin));
-	free(*msh);
-	*msh = NULL;
+	t_cmd *tmp;
+
+	if (cmd)
+		while (*cmd)
+		{
+			tmp = (*cmd)->next;
+			if ((*cmd)->av)
+				sh_free_tab(&((*cmd)->av));
+			free(*cmd);
+			*cmd = tmp;
+		}
 }

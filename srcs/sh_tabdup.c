@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_echo.c                                         :+:      :+:    :+:   */
+/*   sh_tabdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 15:33:03 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 18:17:08 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/26 16:54:04 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/10 13:56:09 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-void	msh_echo(t_msh *msh, t_cmd *cmd)
+char	**sh_tabdup(char **tab)
 {
-	int i;
-	int opt;
+	char	**ret;
+	int		i;
 
-	msh = (void *)msh;
-	opt = 0;
-	if (cmd->av && cmd->av[1])
-		opt = !(ft_strcmp("-n", (cmd->av)[1]));
-	i = (opt) ? 2 : 1;
-	while ((cmd->av)[i])
+	i = 0;
+	ret = NULL;
+	if (tab)
 	{
-		if (i > 1 + opt)
-			ft_putchar(' ');
-		ft_putstr((cmd->av)[i++]);
+		while (tab[i])
+			i++;
+		if (!(ret = (char **)malloc(sizeof(char *) * (i + 1))))
+			return (NULL);
+		i = -1;
+		while (tab[++i])
+			ret[i] = ft_strdup(tab[i]);
+		ret[i] = NULL;
 	}
-	if (!opt)
-		ft_putchar('\n');
+	return (ret);
 }

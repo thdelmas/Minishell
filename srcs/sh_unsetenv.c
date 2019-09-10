@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_find_env.c                                     :+:      :+:    :+:   */
+/*   sh_unsetenv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/26 16:45:17 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/06 16:58:36 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/28 21:14:18 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/10 13:56:22 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-char	**msh_find_env(char *name, char **env)
+void	sh_unsetenv(t_sh *sh, t_cmd *cmd)
 {
-	while (*env)
-	{
-		if (!ft_strncmp(*env, name, ft_strlen(name)))
-		{
-			return (env);
-		}
-		env++;
-	}
-	return (NULL);
+	int		i;
+
+	i = -1;
+	while ((cmd->av)[++i])
+		sh_var_del(&(sh->env), (cmd->av)[i]);
 }

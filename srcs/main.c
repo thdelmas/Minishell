@@ -6,26 +6,26 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/11 14:29:51 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:58:32 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
 int		main(int ac, char **av, char **env)
 {
 	char	**av_tmp;
-	t_msh	*msh;
+	t_sh	*sh;
 
 	if (ac == 1)
 	{
-		if (!(av_tmp = msh_tabdup(av)))
+		if (!(av_tmp = sh_tabdup(av)))
 			return (0);
-		if (!(msh = msh_init_msh(env)))
+		if (!(sh = sh_init_sh(env)))
 			return (0);
-		msh_free_tab(&av_tmp);
-		msh_loop(msh);
-		msh_free_msh(&msh);
+		sh_free_tab(&av_tmp);
+		sh_loop(sh);
+		sh_free_sh(&sh);
 	}
 	return (0);
 }

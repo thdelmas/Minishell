@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_tabdup.c                                       :+:      :+:    :+:   */
+/*   sh_make_arg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/26 16:54:04 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/03/10 22:18:05 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/03/01 23:13:33 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/10 13:55:21 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-char	**msh_tabdup(char **tab)
+void	sh_make_arg(t_sh *sh, t_cmd *cmd)
 {
-	char	**ret;
-	int		i;
+	int i;
 
 	i = 0;
-	ret = NULL;
-	if (tab)
+	if (!cmd || !cmd->av || !*(cmd->av))
+		return ;
+	while (cmd->av[i])
 	{
-		while (tab[i])
-			i++;
-		if (!(ret = (char **)malloc(sizeof(char *) * (i + 1))))
-			return (NULL);
-		i = -1;
-		while (tab[++i])
-			ret[i] = ft_strdup(tab[i]);
-		ret[i] = NULL;
+		if (ft_strchr((cmd->av)[i], '$'))
+			(cmd->av)[i] = sh_dollar_exp(sh, (cmd->av)[i]);
+		if (ft_strchr((cmd->av)[i], '~'))
+			(cmd->av)[i] = sh_tilde_exp(sh, (cmd->av)[i]);
+		++i;
 	}
-	return (ret);
 }

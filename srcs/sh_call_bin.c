@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_call_bin.c                                     :+:      :+:    :+:   */
+/*   sh_call_bin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 16:17:19 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/06 23:39:28 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/09/10 12:47:58 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "sh.h"
 
-static char		**msh_path_bin(char **env)
+static char		**sh_path_bin(char **env)
 {
 	char	*tmp;
 	char	**path;
 	int		i;
 
 	i = 2;
-	if (!(path = msh_find_env("PATH", env)) || !(*path)[5])
+	if (!(path = sh_find_env("PATH", env)) || !(*path)[5])
 		return (NULL);
 	tmp = (*path) + 5;
 	return (ft_strsplit(tmp, ':'));
 }
 
-static void		msh_exec_bin(t_msh *msh, t_cmd *cmd)
+static void		sh_exec_bin(t_sh *sh, t_cmd *cmd)
 {
 	pid_t	father;
 	int		status;
 
-	msh_var_add(&(msh->env), "_=", cmd->av[0]);
+	sh_var_add(&(sh->env), "_=", cmd->av[0]);
 	father = fork();
 	if (father > 0)
 		wait(&status);
 	else if (father == 0)
-		execve(cmd->av[0], cmd->av, msh->env);
+		execve(cmd->av[0], cmd->av, sh->env);
 }
 
-static void		msh_call_bin_sub(t_cmd *cmd, char ***path, char **tmp)
+static void		sh_call_bin_sub(t_cmd *cmd, char ***path, char **tmp)
 {
 	struct stat	r;
 
@@ -53,7 +53,7 @@ static void		msh_call_bin_sub(t_cmd *cmd, char ***path, char **tmp)
 		}
 }
 
-void			msh_call_bin(t_msh *msh, t_cmd *cmd)
+void			sh_call_bin(t_sh *sh, t_cmd *cmd)
 {
 	struct stat	r;
 	char		**path;
@@ -62,22 +62,22 @@ void			msh_call_bin(t_msh *msh, t_cmd *cmd)
 
 	if (lstat(cmd->av[0], &r) == 0
 			&& ((r.st_mode & S_IFMT) != S_IFDIR && (r.st_mode & S_IXUSR)))
-		return (msh_exec_bin(msh, cmd));
-	else if (!(path = msh_path_bin(msh->env)))
+		return (sh_exec_bin(sh, cmd));
+	else if (!(path = sh_path_bin(sh->env)))
 		return ;
 	path2 = path;
-	msh_call_bin_sub(cmd, &path, &tmp);
+	sh_call_bin_sub(cmd, &path, &tmp);
 	if (*(path) && *tmp && *tmp != '/')
-		msh_exec_bin(msh, cmd);
+		sh_exec_bin(sh, cmd);
 	else if (*tmp)
 	{
 		ft_putstr(tmp);
 		free(tmp);
 		ft_putendl(": command not found");
-		msh_free_tab(&path2);
-		msh_free_tab(&(cmd->av));
+		sh_free_tab(&path2);
+		sh_free_tab(&(cmd->av));
 		return ;
 	}
-	msh_free_tab(&path2);
+	sh_free_tab(&path2);
 	free(tmp);
 }
