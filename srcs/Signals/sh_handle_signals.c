@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sh_handle_signals.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/15 15:40:30 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/15 15:24:57 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/15 15:47:09 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
 #include "sh_signals.h"
+#include <stdio.h>
+#include <signal.h>
 
-int		main(int ac, char **av, char **env)
+static void	sh_signal_error()
 {
-	char	**av_tmp;
-	t_sh	*sh;
+	dprintf(2 , "An error occurred while setting a signal handler.\n");
+	sh_exitpoint();
+}
 
-	sh_handle_signals();
-	if (ac == 1)
-	{
-		if (!(av_tmp = sh_tabdup(av)))
-			return (0);
-		if (!(sh = sh_init_sh(env)))
-			return (0);
-		sh_free_tab(&av_tmp);
-		sh_loop(sh);
-		sh_free_sh(&sh);
-	}
-	return (0);
+void	sh_handle_signals(void)
+{
+	if (signal(SIGINT, sh_handle_sigint) == SIG_ERR)
+		sh_signal_error();
 }

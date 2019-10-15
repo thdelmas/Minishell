@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 17:18:13 by thdelmas          #+#    #+#              #
-#    Updated: 2019/09/10 14:16:14 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/15 15:52:39 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ OBJ_DIR := ./.obj
 
 ### SUB FILES ###
 SUB_DIRS := \
+	Signals \
+	Tools \
 
 ### INCLUDE SRC MAKEFILE ###
 include $(SRC_DIR)/sources.mk
@@ -59,7 +61,7 @@ DEBUG_FLAGS = -g3
 CFLAGS = \
 		 $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS) $(FT_INC_DIR)) \
 		 $(DEBUG_FLAGS) \
-		 -Wall -Werror -Wextra
+		 -Weverything
 
 LFLAGS = -ltermcap \
 		 -lncurses \

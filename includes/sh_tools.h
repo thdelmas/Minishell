@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sh_tools.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/15 15:40:30 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/15 15:49:33 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/15 15:50:17 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
-#include "sh_signals.h"
+#ifndef SH_TOOLS_H
+# define SH_TOOLS_H
 
-int		main(int ac, char **av, char **env)
-{
-	char	**av_tmp;
-	t_sh	*sh;
+void	sh_exitpoint(int status);
 
-	sh_handle_signals();
-	if (ac == 1)
-	{
-		if (!(av_tmp = sh_tabdup(av)))
-			return (0);
-		if (!(sh = sh_init_sh(env)))
-			return (0);
-		sh_free_tab(&av_tmp);
-		sh_loop(sh);
-		sh_free_sh(&sh);
-	}
-	return (0);
-}
+#endif

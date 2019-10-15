@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 23:34:28 by thdelmas          #+#    #+#              #
-#    Updated: 2019/09/10 13:57:08 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/15 15:53:18 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,5 +34,12 @@ C_FILES = \
 	sh_unsetenv.c \
 	sh_var_add.c \
 	sh_var_del.c \
+
+C_FILES_Signals= \
+	sh_handle_signals.c \
+	sh_handle_sigint.c
+
+C_FILES_Tools= \
+	sh_exitpoint.c \
 
 C_FILES += $(foreach SUB_DIR,$(SUB_DIRS),$(addprefix $(SUB_DIR)/,$(C_FILES_$(SUB_DIR))))
