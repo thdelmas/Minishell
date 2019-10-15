@@ -1,4 +1,17 @@
-*.logs
-*.report
-logs
+# Object
+*.o
 
+# Librairies
+*.a
+
+# Executables
+*.out
+minishell
+
+# Debug files
+*.dSYM/
+
+# ignore all logs
+log
+*.log
+*.report

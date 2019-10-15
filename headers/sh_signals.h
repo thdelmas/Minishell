@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_tools.h                                         :+:      :+:    :+:   */
+/*   sh_signals.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/15 15:49:33 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/15 15:50:17 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/15 15:37:12 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/15 15:45:31 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_TOOLS_H
-# define SH_TOOLS_H
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-void	sh_exitpoint(int status);
+void	sh_handle_sigint(int sig)__attribute__((noreturn));
+void	sh_handle_signals(void);
 
 #endif

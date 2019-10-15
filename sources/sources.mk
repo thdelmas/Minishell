@@ -35,11 +35,11 @@ C_FILES = \
 	sh_var_add.c \
 	sh_var_del.c \
 
-C_FILES_Signals= \
+C_FILES_signals= \
 	sh_handle_signals.c \
 	sh_handle_sigint.c
 
-C_FILES_Tools= \
+C_FILES_tools= \
 	sh_exitpoint.c \
 
 C_FILES += $(foreach SUB_DIR,$(SUB_DIRS),$(addprefix $(SUB_DIR)/,$(C_FILES_$(SUB_DIR))))

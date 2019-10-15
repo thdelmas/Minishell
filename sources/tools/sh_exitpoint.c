@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_signals.h                                       :+:      :+:    :+:   */
+/*   sh_exipoint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/15 15:37:12 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/15 15:45:31 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/15 15:48:27 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/15 15:49:08 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNAL_H
-# define SIGNAL_H
+#include "sh_tools.h"
+#include <stdlib.h>
 
-void	sh_handle_sigint(int sig);
-void	sh_handle_signals(void);
-
-#endif
+void	sh_exitpoint(int status)
+{
+	exit(status);
+}

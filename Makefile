@@ -17,14 +17,14 @@ AUTHORS := Thdelmas
 RM = /bin/rm
 
 ### Directories ###
-SRC_DIR := ./srcs
-INC_DIR := ./includes
+SRC_DIR := ./sources
+INC_DIR := ./headers
 OBJ_DIR := ./.obj
 
 ### SUB FILES ###
 SUB_DIRS := \
-	Signals \
-	Tools \
+	signals \
+	tools \
 
 ### INCLUDE SRC MAKEFILE ###
 include $(SRC_DIR)/sources.mk
