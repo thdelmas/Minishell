@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_make_arg.c                                     :+:      :+:    :+:   */
+/*   sh_read_tty.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/01 23:13:33 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/10 13:55:21 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/16 16:08:16 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/16 16:10:01 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
-
-void	sh_make_arg(t_sh *sh, t_cmd *cmd)
+void	sh_read_tty()
 {
-	int i;
+	char	c;
 
-	i = 0;
-	if (!cmd || !cmd->av || !*(cmd->av))
-		return ;
-	while (cmd->av[i])
+	while (read(0, &c, 1) > 0)
 	{
-		if (ft_strchr((cmd->av)[i], '$'))
-			(cmd->av)[i] = sh_dollar_exp(sh, (cmd->av)[i]);
-		if (ft_strchr((cmd->av)[i], '~'))
-			(cmd->av)[i] = sh_tilde_exp(sh, (cmd->av)[i]);
-		++i;
+		ft_putchar(c);
 	}
 }
