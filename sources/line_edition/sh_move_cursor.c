@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sh_move_cursor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/16 14:27:58 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/16 14:32:52 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/16 14:52:00 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
-#include "sh_signals.h"
 #include "sh_line_edition.h"
+#include "libft.h"
+#include <term.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-int		main(int ac, char **av, char **env)
+void	sh_move_cursor(int x, int y)
 {
-	char	**av_tmp;
-	t_sh	*sh;
+	char *cm_cap;
 
-	sh_handle_signals();
-	if (ac == 1)
-	{
-		sh_init_termcaps();
-		if (!(av_tmp = sh_tabdup(av)))
-			return (0);
-		if (!(sh = sh_init_sh(env)))
-			return (0);
-		sh_free_tab(&av_tmp);
-		sh_loop(sh);
-		sh_free_sh(&sh);
-	}
-	return (0);
+	cm_cap = tgetstr("cm", NULL);
+	tputs(tgoto(cm_cap, x, y), 10, (int (*)(int))ft_putchar);
 }

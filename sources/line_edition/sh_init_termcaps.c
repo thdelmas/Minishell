@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sh_init_termcaps.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/16 14:27:58 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/16 14:17:33 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/16 14:32:14 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
-#include "sh_signals.h"
-#include "sh_line_edition.h"
+#include "sh_tools.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-int		main(int ac, char **av, char **env)
+static void sh_termcaps_error(int ret)
 {
-	char	**av_tmp;
-	t_sh	*sh;
+	if (ret == -1)
+		dprintf(2, "Could not access to the termcap database..\n");
+	else if (ret == 0)
+		dprintf(2, "Terminal type : not available.\n");
+	sh_exitpoint(1);
+}
 
-	sh_handle_signals();
-	if (ac == 1)
-	{
-		sh_init_termcaps();
-		if (!(av_tmp = sh_tabdup(av)))
-			return (0);
-		if (!(sh = sh_init_sh(env)))
-			return (0);
-		sh_free_tab(&av_tmp);
-		sh_loop(sh);
-		sh_free_sh(&sh);
-	}
-	return (0);
+void	sh_init_termcaps()
+{
+	int ret;
+
+	ret = tgetent(NULL, "vt100");
+	if (ret < 1)
+		sh_termcaps_error(ret);
 }
