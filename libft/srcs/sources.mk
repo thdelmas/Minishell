@@ -6,7 +6,7 @@
 #    By: maboye <maboye@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/30 14:33:15 by thdelmas          #+#    #+#              #
-#    Updated: 2019/08/25 00:52:04 by tmeyer           ###   ########.fr        #
+#    Updated: 2019/10/16 16:40:42 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ C_FILES = \
 
 C_FILES_conv = \
 	ft_atoi.c \
-	ft_itoa.c
+	ft_itoa.c \
+	ft_fdtoa.c
 
 C_FILES_int = \
 	ft_is_prime.c \
@@ -62,6 +63,7 @@ C_FILES_print = \
 	ft_putnbr.c \
 	ft_putnbr_fd.c \
 	ft_putstr.c \
+	ft_print_dbg.c \
 	ft_putstr_fd.c
 
 C_FILES_str = \
@@ -81,6 +83,7 @@ C_FILES_str = \
 	ft_striteri.c \
 	ft_strjoin.c \
 	ft_strjoin_free.c \
+	ft_cjoin_free.c \
 	ft_strlcat.c \
 	ft_strlen.c \
 	ft_strmap.c \
@@ -94,6 +97,7 @@ C_FILES_str = \
 	ft_strnstr.c \
 	ft_strrchr.c \
 	ft_strsplit.c \
+	ft_split_whitespaces.c \
 	ft_strstr.c \
 	ft_strsub.c \
 	ft_strtrim.c \
@@ -111,12 +115,17 @@ C_FILES_print = \
 	ft_putendl.c \
 	ft_putendl_fd.c \
 	ft_putnbr.c \
+	ft_putdbg.c \
+	ft_putdbg_nbr.c \
 	ft_putnbr_fd.c \
 	ft_putstr.c \
 	ft_putstr_fd.c
 
 C_FILES_opt = \
 	ft_getopt.c \
+	ft_fetch_opt.c \
+	ft_free_opts.c \
+	ft_create_opt.c \
 	ft_print_opt.c
 
 # SUPPA concat loop

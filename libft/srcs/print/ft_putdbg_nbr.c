@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_opt.c                                     :+:      :+:    :+:   */
+/*   ft_putdbg_nbr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/09 23:05:02 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/19 15:12:37 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/09/30 17:53:59 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/05 17:55:56 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_opt(t_opt *optlst)
+void	ft_putdbg_nbr(const char *key, int value)
 {
-	while (optlst)
-	{
-		ft_putstr(optlst->name);
-		ft_putchar('=');
-		ft_putstr(optlst->arg);
-		ft_putchar('\n');
-		optlst = optlst->next;
-	}
+	ft_putchar_fd('[', 2);
+	ft_putstr_fd(key, 2);
+	ft_putstr_fd("]-[", 2);
+	ft_putnbr_fd(value, 2);
+	ft_putchar_fd(']', 2);
+	ft_putchar_fd('\n', 2);
 }

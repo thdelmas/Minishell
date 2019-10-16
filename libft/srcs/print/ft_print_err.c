@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_opt.c                                     :+:      :+:    :+:   */
+/*   ft_print_err.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/09 23:05:02 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/19 15:12:37 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/09/29 18:05:03 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/29 18:06:18 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_print_opt(t_opt *optlst)
+void	ft_print_err(const char *s1, const char *s2, const char *s3)
 {
-	while (optlst)
-	{
-		ft_putstr(optlst->name);
-		ft_putchar('=');
-		ft_putstr(optlst->arg);
-		ft_putchar('\n');
-		optlst = optlst->next;
-	}
+	ft_putstr_fd(s1, 2);
+	ft_putstr_fd(s2, 2);
+	ft_putendl_fd(s3, 2);
 }

@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 21:12:27 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/08/25 00:51:26 by tmeyer           ###   ########.fr       */
+/*   Updated: 2019/10/16 16:40:20 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef	struct	s_opt
 	struct s_opt	*next;
 }				t_opt;
 
-char			**ft_free_tabstr(char **tab_tofree);
+void			ft_free_tabstr(char **tab_tofree);
 char			**ft_tab_strdup(char **tabl);
 char			**tab_realloc(char **tabl, char *line);
 
@@ -60,9 +60,11 @@ char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int				ft_strequ(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char splitchar);
+char			**ft_split_whitespaces(char const *s);
 int				ft_strclen(const char *s, char c);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strjoin_free(const char *s1, const char *s2, char *tofree);
+char			*ft_cjoin_free(const char *s1, char c, char *tofree);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 int				ft_match(const char *s1, const char *s2);
@@ -73,6 +75,7 @@ int				ft_isalpha(int c);
 int				ft_islower(int c);
 int				ft_isupper(int c);
 int				ft_isdigit(int c);
+int				ft_isspace(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
@@ -93,6 +96,7 @@ void			ft_memdel(void **ap);
 
 void			ft_tab_strdel(char ***as);
 char			*ft_itoa(int n);
+char			*ft_fdtoa(int fd, int buff_size);
 int				ft_atoi(const char *str);
 
 void			ft_putchar(char c);
@@ -104,6 +108,8 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+void			ft_putdbg(const char *key, const char *value);
+void			ft_putdbg_nbr(const char *key, int value);
 
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
@@ -118,7 +124,9 @@ int				ft_power(int nb, int power);
 int				ft_factorial(int nb);
 
 void			ft_print_opt(t_opt *optlst);
-t_opt			*ft_create_opt(char *name, char *content);
-int				ft_getopt(int *ac, char ***av, char *optstr, t_opt **optlst);
+void			ft_free_opts(t_opt *opts);
+t_opt			*ft_create_sopt(char name, char *content);
+t_opt			*ft_create_dopt(char *name, char *content);
+t_opt			*ft_getopt(int *ac, char ***av, char *optstr);
 t_opt			*ft_fetch_opt(char *name, size_t size, t_opt *optlst);
 #endif

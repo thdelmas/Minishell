@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/12 15:20:07 by thdelmas          #+#    #+#              #
-#    Updated: 2019/08/12 15:39:14 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/16 16:59:14 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,15 +77,14 @@ $(OBJ_DIR): mkdir_msg
 ### Compilation ###
 .ONESHELL:
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile | compil_msg
-	@printf "$(BBLUE)$(@F): $(CLEAR)"
+	@echo "\033[1000D\033[K$(@F) \c"
 	@$(CC) $(LFlAGS) $(CFLAGS) -o $@ -c $<
-	@printf "$(BBLUE)Done !$(CLEAR)\n"
 
 ### Link ###
 .ONESHELL:
 $(NAME): $(OBJ_DIR) $(OBJ) | link_msg
 	@ar rcs $(NAME) $(OBJ)
-	@printf "$(BBLUE)$@: Done.$(CLEAR)\n"
+	@printf "$@: Done !\n"
 
 .ONESHELL:
 test: re

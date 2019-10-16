@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_opt.c                                     :+:      :+:    :+:   */
+/*   ft_cjoin_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/09 23:05:02 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/19 15:12:37 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/16 16:38:42 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/16 17:15:13 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-void	ft_print_opt(t_opt *optlst)
+char	*ft_cjoin_free(const char *s1, char c, char *tofree)
 {
-	while (optlst)
-	{
-		ft_putstr(optlst->name);
-		ft_putchar('=');
-		ft_putstr(optlst->arg);
-		ft_putchar('\n');
-		optlst = optlst->next;
-	}
+	char *dest;
+	char	s2[2];
+
+	s2[0] = c;
+	s2[1] = '\0';
+	dest = ft_strjoin(s1, s2);
+	if (tofree)
+		free(tofree);
+	return (dest);
 }

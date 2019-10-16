@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_opt.c                                     :+:      :+:    :+:   */
+/*   ft_fdtoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/09 23:05:02 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/19 15:12:37 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/09/30 15:53:38 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/09/30 15:59:00 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_opt(t_opt *optlst)
+char	*ft_fdtoa(int fd, int buff_size)
 {
-	while (optlst)
+	char *buff;
+	char *ret;
+
+	ret = NULL;
+	if (buff_size < 1)
+		return (NULL);
+	if (!(buff = ft_strnew(buff_size)))
+		return (NULL);
+	while (read(fd, buff, buff_size) == buff_size)
 	{
-		ft_putstr(optlst->name);
-		ft_putchar('=');
-		ft_putstr(optlst->arg);
-		ft_putchar('\n');
-		optlst = optlst->next;
+		ret = ft_strjoin_free(ret, buff, ret);
 	}
+	ret = ft_strjoin_free(ret, buff, ret);
+	free(buff);
+	return (ret);
 }
