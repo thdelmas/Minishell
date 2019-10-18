@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_types.h                                         :+:      :+:    :+:   */
+/*   sh.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/10 12:37:28 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/10 14:02:54 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/17 18:12:18 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/17 18:19:41 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_TYPES_H
-# define SH_TYPES_H
+#include <unistd.h>
+#include "sh.h"
 
-typedef	struct		s_cmd
+
+t_sh	*sh()
 {
-	char			**av;
-	int				status;
-	struct s_cmd	*next;
-}					t_cmd;
-
-
-typedef struct		s_sh
-{
-	//OLD
-	char	*flags;
-	char	**prim_env;
-	char	**env;
-	t_cmd	*cmd_begin;
-	t_cmd	*cmd;
-}					t_sh;
-
-#endif
+	static t_sh	*s = NULL;
+	
+	if ((s = (t_sh *)malloc(sizeof(t_sh))))
+		sh_sh_clr(s);
+	return (s);
+}
