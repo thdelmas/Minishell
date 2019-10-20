@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_handle_sigint.c                                 :+:      :+:    :+:   */
+/*   sh_set_tty.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/15 15:34:20 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/20 17:43:48 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/20 17:08:53 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/20 17:40:51 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_signals.h"
-#include "sh_tools.h"
+#include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+#include <unistd.h>
 
-void	sh_handle_sigint(int signal)
+#include "sh.h"
+
+void	sh_set_tty(int mode)
 {
-	(void)signal;
-	dprintf(2, "\n\nMsh: Signal received: SIGINT\n\n");
-	sh_exitpoint(1);
+	struct termios	term;
+	struct termios	orig;
+
+	tcgetattr(STDIN_FILENO, &orig);
+       	sh()->reset = &orig;
+	sh()->term = &term;
+	term = orig;
+	term.c_lflag &= ~(ICANON);
+	term.c_lflag &= ~(ECHO);
+	term.c_lflag &= ISIG;
+	term.c_cc[VMIN] = 1;
+	term.c_cc[VTIME] = 0;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }

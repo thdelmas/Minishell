@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_line_edition.c                                  :+:      :+:    :+:   */
+/*   sh_reset_tty.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/16 14:28:10 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/20 17:29:44 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/20 17:14:51 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/20 17:38:12 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_LINE_EDITION
-# define SH_LINE_EDITION
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+#include <unistd.h>
 
-void	sh_init_termcaps(void);
-void	sh_reset_tty(void);
-void	sh_set_tty(void);
+#include "sh.h"
 
-#endif
+void	sh_reset_tty()
+{
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, sh()->reset);
+}

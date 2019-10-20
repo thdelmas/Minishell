@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 23:34:28 by thdelmas          #+#    #+#              #
-#    Updated: 2019/10/18 16:22:57 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/20 17:22:08 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ C_FILES = \
 C_FILES_line_edition= \
 	sh_init_termcaps.c \
 	sh_move_cursor.c \
+	sh_set_tty.c \
+	sh_reset_tty.c \
 
 C_FILES_signals= \
 	sh_handle_signals.c \

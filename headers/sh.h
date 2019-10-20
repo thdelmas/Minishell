@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:17:09 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/18 16:32:56 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/20 17:36:58 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 typedef struct		s_sh
 {
 	int		exit;
-	struct termios	term;
+	struct termios	*term;
+	struct termios	*reset;
 }			t_sh;
 
 t_sh	*sh(void);
