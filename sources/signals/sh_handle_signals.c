@@ -6,18 +6,20 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:24:57 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/19 16:57:19 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/21 00:50:31 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_signals.h"
 #include <stdio.h>
 #include <signal.h>
+
+#include "sh_signals.h"
+#include "sh_tools.h"
 
 static void	sh_signal_error()
 {
 	dprintf(2 , "An error occurred while setting a signal handler.\n");
-	sh_exitpoint();
+	sh_exitpoint(1);
 }
 
 void	sh_handle_signals(void)

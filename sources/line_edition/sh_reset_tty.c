@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 17:14:51 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/20 17:38:12 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/20 23:19:38 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@
 
 void	sh_reset_tty()
 {
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, sh()->reset);
+	tcsetattr(STDIN_FILENO, TCSADRAIN, sh()->reset);
 }

@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 17:08:53 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/20 17:40:51 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/21 00:53:45 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "sh.h"
 
-void	sh_set_tty(int mode)
+void	sh_set_tty()
 {
 	struct termios	term;
 	struct termios	orig;
@@ -27,9 +27,8 @@ void	sh_set_tty(int mode)
        	sh()->reset = &orig;
 	sh()->term = &term;
 	term = orig;
-	term.c_lflag &= ~(ICANON);
-	term.c_lflag &= ~(ECHO);
-	term.c_lflag &= ISIG;
+	term.c_lflag &= ~(ECHO | ICANON);
+	term.c_lflag &= (ISIG);
 	term.c_cc[VMIN] = 1;
 	term.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);

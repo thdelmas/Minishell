@@ -6,21 +6,24 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 16:08:16 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/20 17:19:28 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/21 00:52:33 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <curses.h>
+#include <term.h>
 
 #include "libft.h"
 #include "sh.h"
+#include "sh_line_edition.h"
 
 void	sh_read_tty()
 {
 	char	c[5];
 	char	*buff;
 	int	len;
+	char	*cl_cap = tgetstr("cl", NULL);
 
 	buff = NULL;
 	ft_bzero(c, 5);
@@ -28,27 +31,11 @@ void	sh_read_tty()
 	sh_set_tty();
 	while (read(0, c, 1) > 0)
 	{
-		if (*c != '\n')
-			buff = ft_cjoin_free(buff, *c, buff);
-		else
-		{
-			len = ft_strlen(buff);
-			if (len >= 3)
-			{
-				c[0] = buff[len - 3];
-				printf("%c %d\n", c[0], (int)c[0]);
-			}
-			if (len >= 2)
-			{
-				c[1] = buff[len - 2];
-				printf("%c %d\n", c[1], (int)c[1]);
-			}
-			if (len >= 1)
-			{
-				c[2] = buff[len - 1];
-				printf("%c %d\n", c[2], (int)c[2]);
-			}
-		}
-		ft_bzero(c, 4);
+		if (*c == 'q')
+			break;
+		ft_putnbr_fd((int)*c, 0);
+		ft_putchar_fd(' ', 0);
+		ft_bzero(c, 5);
 	}
+	tputs (cl_cap, 1, putchar);
 }

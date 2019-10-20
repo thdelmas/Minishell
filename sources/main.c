@@ -6,19 +6,20 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/18 16:19:20 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/21 00:47:32 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
+#include "sh_tools.h"
 #include "sh_signals.h"
 #include "sh_line_edition.h"
 
-int		main(int ac, char **av, char **env)
+int		main(int ac, char **av, char **ev)
 {
-	char	**av_tmp;
-	t_sh	*sh;
-
+	(void)ac;
+	(void)av;
+	(void)ev;
 	sh_handle_signals();
 	if (ac == 1)
 	{
