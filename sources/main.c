@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:49:05 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/16 14:27:58 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/26 16:33:14 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		main(int ac, char **av, char **env)
 	sh_handle_signals();
 	if (ac == 1)
 	{
+		sh_init_tty();
 		sh_init_termcaps();
 		if (!(av_tmp = sh_tabdup(av)))
 			return (0);

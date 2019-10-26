@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   sh_init_tty.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 21:27:10 by thdelmas          #+#    #+#             */
-/*   Updated: 2018/11/09 21:27:12 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/26 16:18:52 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/26 16:31:29 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "sh_tools.h"
 
-void	ft_putnbr(int nb)
+#include <unistd.h>
+
+void	sh_init_tty()
 {
-	unsigned int nb2;
-
-	if (nb < 0)
+	if (!isatty(STDIN_FILENO))
 	{
-		nb2 = -nb;
-		ft_putchar('-');
+		ft_putendl_fd("Not a TTY", STDERR_FILENO);
+		sh_exitpoint(1);
 	}
-	else
-		nb2 = nb;
-	if (nb2 >= 10)
-	{
-		ft_putnbr(nb2 / 10);
-		ft_putnbr(nb2 % 10);
-	}
-	else
-		ft_putchar(nb2 + 48);
 }

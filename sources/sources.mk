@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 23:34:28 by thdelmas          #+#    #+#              #
-#    Updated: 2019/10/16 14:37:32 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/26 16:27:05 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ C_FILES_signals= \
 	sh_handle_sigint.c
 
 C_FILES_tools= \
+	sh_init_tty.c \
 	sh_exitpoint.c \
 
 C_FILES += $(foreach SUB_DIR,$(SUB_DIRS),$(addprefix $(SUB_DIR)/,$(C_FILES_$(SUB_DIR))))
