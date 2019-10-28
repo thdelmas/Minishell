@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
 static void	sh_var_replace(char ***tab, char *name, char *val)
 {

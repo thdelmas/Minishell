@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
-char			*sh_dollar_exp(t_sh *sh, char *str)
+char			*sh_dollar_exp(t_osh *sh, char *str)
 {
 	char	*c;
 	char	*tmp;

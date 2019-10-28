@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
-void	sh_unsetenv(t_sh *sh, t_cmd *cmd)
+void	sh_unsetenv(t_osh *sh, t_cmd *cmd)
 {
 	int		i;
 

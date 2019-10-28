@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
-void	sh_print_env(t_sh *sh, t_cmd *cmd)
+void	sh_print_env(t_osh *sh, t_cmd *cmd)
 {
 	char **tmp;
 

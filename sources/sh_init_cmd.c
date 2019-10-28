@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 #include "get_next_line.h"
 
 static int	sh_empty_ln(char *line)

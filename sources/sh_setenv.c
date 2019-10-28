@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
 static int	sh_check_var(char *str)
 {
@@ -21,7 +21,7 @@ static int	sh_check_var(char *str)
 	return (1);
 }
 
-void		sh_setenv(t_sh *sh, t_cmd *cmd)
+void		sh_setenv(t_osh *sh, t_cmd *cmd)
 {
 	char	**tmp;
 	char	*str;

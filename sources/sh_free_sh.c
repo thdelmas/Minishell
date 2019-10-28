@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
-void	sh_free_sh(t_sh **sh)
+void	sh_free_sh(t_osh **sh)
 {
 	if ((*sh)->flags)
 		free(&((*sh)->flags));

@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:37:28 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/10 14:02:54 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/28 21:01:38 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef	struct		s_cmd
 }					t_cmd;
 
 
-typedef struct		s_sh
+typedef struct		s_osh
 {
 	//OLD
 	char	*flags;
@@ -29,6 +29,6 @@ typedef struct		s_sh
 	char	**env;
 	t_cmd	*cmd_begin;
 	t_cmd	*cmd;
-}					t_sh;
+}					t_osh;
 
 #endif

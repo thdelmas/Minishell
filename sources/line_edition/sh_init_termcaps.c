@@ -6,11 +6,13 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:17:33 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/16 14:32:14 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:59:55 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_tools.h"
+
+#include <term.h>
 #include <stdlib.h>
 #include <stdio.h>
 

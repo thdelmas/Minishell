@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_init_sh.c                                     :+:      :+:    :+:   */
+/*   sh_init_osh.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
-static void	sh_init_shlvl(t_sh *sh)
+static void	sh_init_oshlvl(t_osh *sh)
 {
 	char	**shlvl;
 	char	*tmp;
@@ -29,7 +29,7 @@ static void	sh_init_shlvl(t_sh *sh)
 	free(tmp2);
 }
 
-static void	sh_init_pwd(t_sh *sh)
+static void	sh_init_pwd(t_osh *sh)
 {
 	char	*tmp2;
 
@@ -41,17 +41,17 @@ static void	sh_init_pwd(t_sh *sh)
 	}
 }
 
-static void	sh_init_env(t_sh *sh)
+static void	sh_init_env(t_osh *sh)
 {
 	sh_init_pwd(sh);
-	sh_init_shlvl(sh);
+	sh_init_oshlvl(sh);
 }
 
-t_sh		*sh_init_sh(char **env)
+t_osh		*sh_init_osh(char **env)
 {
-	t_sh *sh;
+	t_osh *sh;
 
-	if (!(sh = (t_sh *)malloc(sizeof(t_sh))))
+	if (!(sh = (t_osh *)malloc(sizeof(t_osh))))
 		return (NULL);
 	sh->flags = NULL;
 	sh->prim_env = sh_tabdup(env);

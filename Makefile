@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 17:18:13 by thdelmas          #+#    #+#              #
-#    Updated: 2019/10/16 14:53:35 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/28 20:19:58 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ OBJ_DIR := ./.obj
 
 ### SUB FILES ###
 SUB_DIRS := \
+	env \
 	signals \
 	tools \
 	line_edition \
@@ -62,7 +63,7 @@ DEBUG_FLAGS = -g3
 CFLAGS = \
 		 $(addprefix -I ,$(INC_DIR) $(INC_SUB_DIRS) $(FT_INC_DIR)) \
 		 $(DEBUG_FLAGS) \
-		 -Weverything
+		 -Wall -Wextra -Werror
 
 LFLAGS = -ltermcap \
 		 -lncurses \

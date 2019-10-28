@@ -6,11 +6,11 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 16:17:19 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/10 12:47:58 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:14:42 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
 static char		**sh_path_bin(char **env)
 {
@@ -25,7 +25,7 @@ static char		**sh_path_bin(char **env)
 	return (ft_strsplit(tmp, ':'));
 }
 
-static void		sh_exec_bin(t_sh *sh, t_cmd *cmd)
+static void		sh_exec_bin(t_osh *sh, t_cmd *cmd)
 {
 	pid_t	father;
 	int		status;
@@ -53,7 +53,7 @@ static void		sh_call_bin_sub(t_cmd *cmd, char ***path, char **tmp)
 		}
 }
 
-void			sh_call_bin(t_sh *sh, t_cmd *cmd)
+void			sh_call_bin(t_osh *sh, t_cmd *cmd)
 {
 	struct stat	r;
 	char		**path;

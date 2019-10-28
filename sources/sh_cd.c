@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
-static void		sh_cd_sub(t_sh *sh, char **pwd, char **np, char *olddir)
+static void		sh_cd_sub(t_osh *sh, char **pwd, char **np, char *olddir)
 {
 	if (*(*np) == '-' && (pwd = sh_find_env("OLDPWD", sh->env)) && pwd[0][7])
 	{
@@ -41,7 +41,7 @@ static void		sh_cd_sub(t_sh *sh, char **pwd, char **np, char *olddir)
 	}
 }
 
-void			sh_cd(t_sh *sh, t_cmd *cmd)
+void			sh_cd(t_osh *sh, t_cmd *cmd)
 {
 	char	**pwd;
 	char	*tmp;

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
-static char		**sh_tilde_exp_sub(t_sh *sh, char *c)
+static char		**sh_tilde_exp_sub(t_osh *sh, char *c)
 {
 	char	**ret;
 
@@ -34,7 +34,7 @@ static char		**sh_tilde_exp_sub(t_sh *sh, char *c)
 	return (ret);
 }
 
-char			*sh_tilde_exp(t_sh *sh, char *str)
+char			*sh_tilde_exp(t_osh *sh, char *str)
 {
 	char	*c;
 	char	*tmp;

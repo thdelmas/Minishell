@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "osh.h"
 
-void	(*sh_is_builtin(t_cmd *cmd))(t_sh *, t_cmd *)
+void	(*sh_is_builtin(t_cmd *cmd))(t_osh *, t_cmd *)
 {
 	if (!ft_strcmp((cmd->av)[0], "cd"))
 		return (&sh_cd);
@@ -27,9 +27,9 @@ void	(*sh_is_builtin(t_cmd *cmd))(t_sh *, t_cmd *)
 	return (NULL);
 }
 
-void	sh_loop(t_sh *sh)
+void	sh_loop(t_osh *sh)
 {
-	void	(*f)(t_sh *sh, t_cmd *);
+	void	(*f)(t_osh *sh, t_cmd *);
 	t_cmd	*tmp;
 	t_cmd	*cmd;
 
