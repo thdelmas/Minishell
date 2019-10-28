@@ -6,13 +6,14 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 23:34:28 by thdelmas          #+#    #+#              #
-#    Updated: 2019/10/26 16:27:05 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/28 21:35:20 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 C_FILES = \
-	get_next_line.c \
 	main.c \
+	sh.c \
+	get_next_line.c \
 	sh_call_bin.c \
 	sh_cd.c \
 	sh_dollar_exp.c \
@@ -44,7 +45,10 @@ C_FILES_signals= \
 	sh_handle_sigint.c
 
 C_FILES_tools= \
+	sh_constructor.c \
+	sh_destructor.c \
 	sh_init_tty.c \
 	sh_exitpoint.c \
+	sh_shclr.c \
 
 C_FILES += $(foreach SUB_DIR,$(SUB_DIRS),$(addprefix $(SUB_DIR)/,$(C_FILES_$(SUB_DIR))))

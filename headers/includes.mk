@@ -6,12 +6,14 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 23:31:57 by thdelmas          #+#    #+#              #
-#    Updated: 2019/10/28 20:19:19 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/28 21:31:58 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 H_FILES = \
 	osh.h \
+	sh_tools.h \
 	sh_types.h \
 	sh_line_edition.h \
+	sh.h \
 	get_next_line.h

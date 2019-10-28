@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh.h                                               :+:      :+:    :+:   */
+/*   sh_constructor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 21:01:18 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/28 21:39:10 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/28 21:22:02 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/28 21:36:23 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#include "libft.h"
+#include "sh.h"
 
-# include "sh_env.h"
-
-typedef struct	s_sh
+void	sh_constructor(void)
 {
-	t_env	*env;
-}		t_sh;
-
-void	sh_constructor(void)__attribute__((constructor));
-void	sh_destructor(void)__attribute__((destructor));
-
-#endif
+	ft_putendl("Constructor");
+}

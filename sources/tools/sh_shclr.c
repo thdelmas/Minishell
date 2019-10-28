@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh.h                                               :+:      :+:    :+:   */
+/*   sh_shclr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 21:01:18 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/28 21:39:10 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/28 21:19:33 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/28 21:30:17 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#include "sh.h"
+#include <unistd.h>
 
-# include "sh_env.h"
-
-typedef struct	s_sh
+void	sh_shclr(t_sh *s)
 {
-	t_env	*env;
-}		t_sh;
-
-void	sh_constructor(void)__attribute__((constructor));
-void	sh_destructor(void)__attribute__((destructor));
-
-#endif
+	s->env = NULL;
+}

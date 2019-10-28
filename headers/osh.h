@@ -6,12 +6,12 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:58 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/28 20:14:12 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/28 21:33:48 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#ifndef OSH_H
+# define OSH_H
 
 # include <stdio.h>
 # include <unistd.h>

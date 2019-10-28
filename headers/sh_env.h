@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh.h                                               :+:      :+:    :+:   */
+/*   sh_env.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 21:01:18 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/28 21:39:10 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/28 21:15:11 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/28 21:29:11 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#ifndef SH_ENV_H
+# define SH_ENV_H
 
-# include "sh_env.h"
-
-typedef struct	s_sh
+typedef struct		s_env
 {
-	t_env	*env;
-}		t_sh;
-
-void	sh_constructor(void)__attribute__((constructor));
-void	sh_destructor(void)__attribute__((destructor));
+	char		*key;
+	char		*value;
+	char		exp;
+	char		rdo;
+	struct	s_env	*next;
+}			t_env;
 
 #endif
