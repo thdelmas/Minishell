@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 21:01:18 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/28 21:39:10 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/07/04 16:49:08 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/28 21:51:11 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 
 typedef struct	s_sh
 {
-	t_env	*env;
+	t_env		*env;
 }		t_sh;
 
-void	sh_constructor(void)__attribute__((constructor));
-void	sh_destructor(void)__attribute__((destructor));
+t_sh			*sh(void);
+void			sh_constructor(void) __attribute__((constructor));
+void			sh_destructor(void) __attribute__((destructor));
 
 #endif
