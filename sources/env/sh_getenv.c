@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_env.h                                           :+:      :+:    :+:   */
+/*   sh_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 21:15:11 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/29 14:00:00 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/10/29 13:56:51 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/29 13:57:53 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_ENV_H
-# define SH_ENV_H
+#include "sh.h"
+#include "libft.h"
+#include "sh_env.h"
 
-typedef struct		s_env
+t_env	*sh_getenv(const char *key)
 {
-	char		*key;
-	char		*value;
-	char		exp;
-	char		rdo;
-	struct	s_env	*next;
-}			t_env;
+	t_env	*tmp;
 
-void	sh_setenv(const char *key, const char *value);
-void	sh_unsetenv(const char *key);
-t_env	*sh_getenv(const char *key);
-
-#endif
+	if (!(tmp = sh()->env))
+		return (NULL);
+	while (tmp && ft_strcmp(tmp->key, key))
+		tmp = tmp->next;
+	return (tmp);
+}

@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 22:30:46 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/09/10 12:51:29 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/29 14:12:20 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	(*sh_is_builtin(t_cmd *cmd))(t_osh *, t_cmd *)
 	else if (!ft_strcmp((cmd->av)[0], "echo"))
 		return (&sh_echo);
 	else if (!ft_strcmp((cmd->av)[0], "setenv"))
-		return (&sh_setenv);
+		return (&sh_export);
 	else if (!ft_strcmp((cmd->av)[0], "unsetenv"))
-		return (&sh_unsetenv);
+		return (&sh_unset);
 	return (NULL);
 }
 

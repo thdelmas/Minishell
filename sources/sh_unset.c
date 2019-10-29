@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_env.h                                           :+:      :+:    :+:   */
+/*   sh_unsetenv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 21:15:11 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/29 14:00:00 by thdelmas         ###   ########.fr       */
+/*   Created: 2019/02/28 21:14:18 by thdelmas          #+#    #+#             */
+/*   Updated: 2019/10/29 14:09:38 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_ENV_H
-# define SH_ENV_H
+#include "osh.h"
 
-typedef struct		s_env
+void	sh_unset(t_osh *sh, t_cmd *cmd)
 {
-	char		*key;
-	char		*value;
-	char		exp;
-	char		rdo;
-	struct	s_env	*next;
-}			t_env;
+	int		i;
 
-void	sh_setenv(const char *key, const char *value);
-void	sh_unsetenv(const char *key);
-t_env	*sh_getenv(const char *key);
-
-#endif
+	i = -1;
+	while ((cmd->av)[++i])
+		sh_var_del(&(sh->env), (cmd->av)[i]);
+}

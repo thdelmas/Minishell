@@ -6,7 +6,7 @@
 /*   By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:58 by thdelmas          #+#    #+#             */
-/*   Updated: 2019/10/28 21:33:48 by thdelmas         ###   ########.fr       */
+/*   Updated: 2019/10/29 14:12:49 by thdelmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void				sh_make_arg(t_osh *sh, t_cmd *cmd);
 void				sh_cd(t_osh *sh, t_cmd *cmd);
 void				sh_echo(t_osh *sh, t_cmd *cmd);
 void				sh_print_env(t_osh *sh, t_cmd *cmd);
-void				sh_setenv(t_osh *sh, t_cmd *cmd);
-void				sh_unsetenv(t_osh *sh, t_cmd *cmd);
+void				sh_export(t_osh *sh, t_cmd *cmd);
+void				sh_unset(t_osh *sh, t_cmd *cmd);
 void				sh_var_add(char ***tab, char *name, char *value);
 void				sh_var_del(char ***tab, char *name);
 void				sh_free_tab(char ***tab);

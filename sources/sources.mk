@@ -6,7 +6,7 @@
 #    By: thdelmas <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 23:34:28 by thdelmas          #+#    #+#              #
-#    Updated: 2019/10/28 21:35:20 by thdelmas         ###   ########.fr        #
+#    Updated: 2019/10/29 14:11:22 by thdelmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,18 @@ C_FILES = \
 	sh_make_arg.c \
 	sh_print_env.c \
 	sh_prompt.c \
-	sh_setenv.c \
+	sh_export.c \
 	sh_split_whitespaces.c \
 	sh_tabdup.c \
 	sh_tilde_exp.c \
-	sh_unsetenv.c \
+	sh_unset.c \
 	sh_var_add.c \
 	sh_var_del.c \
+
+C_FILES_env= \
+	sh_setenv.c \
+	sh_getenv.c \
+	sh_unsetenv.c \
 
 C_FILES_line_edition= \
 	sh_init_termcaps.c \
